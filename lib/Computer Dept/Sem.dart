@@ -1,5 +1,3 @@
-import 'package:Remedial_App/Computer%20Dept/Sem_1_sub/M_1.dart';
-import 'package:Remedial_App/Exam_Screen/Start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
