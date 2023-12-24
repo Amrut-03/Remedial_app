@@ -8,7 +8,6 @@ import '../Computer Dept/Semester_4.dart';
 import '../Computer Dept/Semester_5.dart';
 import '../Computer Dept/Semester_6.dart';
 import '../Computer Dept/Semester_7.dart';
-import 'Choose_sem.dart';
 
 class Computer extends StatefulWidget {
   Computer({super.key,});

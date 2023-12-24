@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Chemistry extends StatelessWidget {
-  const Chemistry({super.key});
+class EEE extends StatelessWidget {
+  const EEE({super.key});
 
   @override
   Widget build(BuildContext context) {

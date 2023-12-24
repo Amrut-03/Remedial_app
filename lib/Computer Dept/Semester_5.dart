@@ -1,24 +1,226 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../dash_bar.dart';
-import 'Sem.dart';
 
-class Semester_5 extends StatefulWidget {
-  const Semester_5({super.key});
+class Semester_5 extends StatelessWidget {
+  const Semester_5({
+    super.key,
+  });
 
-  @override
-  State<Semester_5> createState() => _Semester_5State();
-}
-
-class _Semester_5State extends State<Semester_5> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // body: Sem(assets: Image.asset("images/Backgrounds/back1.png",),
-        //   branch: 'Computer Science and Engineering',
-        //   clr: Colors.black, sub1: 'Theory of Computer', sub2: 'DataBase Management', sub3: 'Software Engineering',
-        //   sub4: 'Human Computer Interaction', sub5: 'Business Communication',Top: 80,Bottom: 40,Left: 20,Right: 20,),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(padding: EdgeInsets.only(bottom: 20),
+                    child: Container(
+                      height: 200,
+                      width: 350,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          child: Stack(
+                            children: [
+                              Image.asset("images/Backgrounds/back1.png"),
+                              Padding(
+                                padding: EdgeInsets.only(top: 80,bottom: 40,left: 20,right: 20),
+                                child: Text('Computer Science and Engineering',style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black
+                                ),),
+                              )
+                            ],
+                          )
+                      ),
+                    ),),
+                  Padding(padding: EdgeInsets.all(20),
+                    child: Container(
+                      height: 60,
+                      width: 350,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.black,
+                          boxShadow: [BoxShadow(
+                              color: Colors.deepPurpleAccent,
+                              spreadRadius: 2,
+                              blurRadius: 6
+                          )]
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Choose your Backlog Subject",style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 20
+                        ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30,right: 30,top: 20,bottom: 10),
+                    child: InkWell(
+                      onTap: (){
+      
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            boxShadow: [BoxShadow(
+                              color: Colors.deepPurpleAccent,
+                              spreadRadius: 2,
+                              blurRadius: 6,
+                            )]
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30,right: 20),
+                            child: Text('DataBase Management',style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30,right: 30,top: 10,bottom: 10),
+                    child: InkWell(
+                      onTap: (){
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            boxShadow: [BoxShadow(
+                                color: Colors.deepPurpleAccent,
+                                spreadRadius: 2,
+                                blurRadius: 6
+                            )]
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30,right: 20),
+                            child: Text('Theory of Computer',style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30,right: 30,top: 10,bottom: 10),
+                    child: InkWell(
+                      onTap: (){
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            boxShadow: [BoxShadow(
+                                color: Colors.deepPurpleAccent,
+                                spreadRadius: 2,
+                                blurRadius: 6
+                            )]
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30,right: 10),
+                            child: Text('Software Engineering',textAlign: TextAlign.center,style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30,right: 30,top: 10,bottom: 10),
+                    child: InkWell(
+                      onTap: (){
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            boxShadow: [BoxShadow(
+                                color: Colors.deepPurpleAccent,
+                                spreadRadius: 2,
+                                blurRadius: 6
+                            )]
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30,right: 20),
+                            child: Text('Human Computer Interaction',style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30,right: 30,top: 10,bottom: 10),
+                    child: InkWell(
+                      onTap: (){
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            boxShadow: [BoxShadow(
+                                color: Colors.deepPurpleAccent,
+                                spreadRadius: 2,
+                                blurRadius: 6
+                            )]
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30,right: 20),
+                            child: Text('Business Communication',textAlign: TextAlign.center,style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  dash_bar(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

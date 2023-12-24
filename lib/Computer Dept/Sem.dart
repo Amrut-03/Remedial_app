@@ -1,31 +1,12 @@
+import 'package:Remedial_App/Computer Dept/Sem_1_sub/M_1.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../dash_bar.dart';
 
 class Sem extends StatelessWidget {
-
-  final String branch;
-  final String sub1;
-  final String sub2;
-  final String sub3;
-  final String sub4;
-  final String sub5;
-  final Image assets;
-  final Color clr;
-  final double Top;
-  final double Bottom;
-  final double Left;
-  final double Right;
-
   const Sem({
-    super.key, required this.assets, required this.branch,
-    required this.clr, required this.sub1, required this.sub2,
-    required this.sub3, required this.sub4, required this.sub5,
-    required this.Top, required this.Bottom, required this.Left,
-    required this.Right,
+    super.key,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +25,13 @@ class Sem extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         child: Stack(
                           children: [
-                            assets,
+                            Image.asset("images/Backgrounds/back1.png"),
                             Padding(
-                              padding: EdgeInsets.only(top: Top,bottom: Bottom,right: Right,left: Left),
-                              child: Text(branch,style: GoogleFonts.poppins(
+                              padding: EdgeInsets.only(top: 80,bottom: 40,left: 20,right: 20),
+                              child: Text('Computer Science and Engineering',style: GoogleFonts.poppins(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: clr
+                                  color: Colors.black
                               ),),
                             )
                           ],
@@ -85,7 +66,7 @@ class Sem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 30,right: 30,top: 20,bottom: 10),
                   child: InkWell(
                     onTap: (){
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>M1()));
                     },
                     child: Container(
                       height: 50,
@@ -102,7 +83,7 @@ class Sem extends StatelessWidget {
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30,right: 20),
-                          child: Text(sub1,style: GoogleFonts.poppins(
+                          child: Text('Mathematics 1',style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Colors.white,
@@ -132,7 +113,7 @@ class Sem extends StatelessWidget {
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30,right: 20),
-                          child: Text(sub2,style: GoogleFonts.poppins(
+                          child: Text('Chemistry',style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Colors.white,
@@ -162,7 +143,7 @@ class Sem extends StatelessWidget {
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30,right: 10),
-                          child: Text(sub3,textAlign: TextAlign.center,style: GoogleFonts.poppins(
+                          child: Text('Mechanics',textAlign: TextAlign.center,style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Colors.white,
@@ -192,7 +173,7 @@ class Sem extends StatelessWidget {
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30,right: 20),
-                          child: Text(sub4,style: GoogleFonts.poppins(
+                          child: Text('C Programming',style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Colors.white,
@@ -222,7 +203,7 @@ class Sem extends StatelessWidget {
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30,right: 20),
-                          child: Text(sub5,textAlign: TextAlign.center,style: GoogleFonts.poppins(
+                          child: Text(' ',textAlign: TextAlign.center,style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Colors.white,
