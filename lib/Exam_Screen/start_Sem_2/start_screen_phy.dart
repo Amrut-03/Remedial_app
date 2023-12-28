@@ -1,3 +1,4 @@
+import 'package:Remedial_App/Exam_Screen/Exam_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,18 +13,33 @@ class start_screen_phy extends StatelessWidget {
         width: double.infinity,
         color: Colors.black,
         child: InkWell(
-            child: Center(
-              child: Text(
-                "Start Test",
-                style: GoogleFonts.poppins(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Exam_interface()));
+          },
+          child: Center(
+            child: Container(
+              height: 50,
+              width: 150,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
               ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Start Test",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+          ),
             )
         ),
-      ),
     );
   }
 }

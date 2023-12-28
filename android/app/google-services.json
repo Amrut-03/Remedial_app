@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1049695962379",
+    "project_id": "remedial-app",
+    "storage_bucket": "remedial-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049695962379:android:1ebbc52d5eed3ad183ce0e",
+        "android_client_info": {
+          "package_name": "com.example.firstapps"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4fjCMKu6E-0R9ei2A12SB9aAD0qOd7Kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

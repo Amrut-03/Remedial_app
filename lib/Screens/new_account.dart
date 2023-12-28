@@ -1,5 +1,6 @@
 import 'package:Remedial_App/Screens/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class New_account extends StatelessWidget {
@@ -18,30 +19,30 @@ class New_account extends StatelessWidget {
             child: Text("Create your Account",
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
-                fontSize: 30,
+                fontSize: 30.sp,
                 color: Colors.white,
               ),
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: 30.h,),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(50),
-                  topRight: Radius.circular(50),),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(50.r),
+                  topRight: Radius.circular(50.r),),
               ),
               child: Padding(
-                padding: EdgeInsets.only(top: 50,left: 20,right: 20,bottom: 20),
+                padding: EdgeInsets.only(top: 50.h,left: 20.w,right: 20.w,bottom: 20.h),
                 child: Column(
                   children: [
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10.r)),
                           boxShadow: [BoxShadow(
                             color: Color.fromRGBO(150, 110, 250,3),
-                            blurRadius: 20,
+                            blurRadius: 20.r,
                           )]
                       ),
                       child: Column(
@@ -153,24 +154,24 @@ class New_account extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 40,),
+                    SizedBox(height: 40.h,),
                     GestureDetector(
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>login_page()));
                       },
                       child: Container(
-                        height: 50,
-                        width: 400,
+                        height: 50.h,
+                        width: 400.w,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: BorderRadius.all(Radius.circular(20.r)),
                             color: Colors.black,
                             border: Border.all(
                                 color: Colors.white
                             ),
                             boxShadow: [BoxShadow(
                               color: Colors.deepPurpleAccent,
-                              spreadRadius: 2,
-                              blurRadius: 6,
+                              spreadRadius: 2.r,
+                              blurRadius: 6.r,
                             )]
                         ),
                         child: Padding(
@@ -184,12 +185,12 @@ class New_account extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 10.h,),
                     Divider(
                       color: Colors.black,
                       thickness: 0.6,
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 10.h,),
                     GestureDetector(child: Text("Login",style: TextStyle(color: Colors.grey),),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>login_page(),));
