@@ -45,6 +45,7 @@ dependencies:
 
   google_fonts: ^6.1.0
   rive: ^0.12.3
+  firebase_auth: ^4.16.0
 
 dev_dependencies:
   flutter_test:
