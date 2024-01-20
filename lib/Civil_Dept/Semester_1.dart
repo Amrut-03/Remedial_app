@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../Computer Dept/Sem.dart';
 
 
 class Semester_1 extends StatefulWidget {

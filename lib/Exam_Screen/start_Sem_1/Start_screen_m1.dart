@@ -1,4 +1,4 @@
-import 'package:Remedial_App/Exam_Screen/Exam_interface.dart';
+import 'package:Remedial_App/Exam_Screen/start_Sem_1/exam_m1.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +18,7 @@ class _start_Screen_m1State extends State<start_Screen_m1> {
         body: Center(
           child: InkWell(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Exam_interface()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ExamM1(sem_num: 'sem2', subject: 'maths',)));
             },
               child: Container(
                 height: 50,

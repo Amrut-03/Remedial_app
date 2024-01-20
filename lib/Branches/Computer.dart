@@ -1,14 +1,9 @@
-import 'package:Remedial_App/dash_bar.dart';
+import 'package:Remedial_App/Screens/floating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../Computer Dept/Semester_1.dart';
 import '../Computer Dept/Semester_2.dart';
-import '../Computer Dept/Semester_3.dart';
-import '../Computer Dept/Semester_4.dart';
-import '../Computer Dept/Semester_5.dart';
-import '../Computer Dept/Semester_6.dart';
-import '../Computer Dept/Semester_7.dart';
 
 class Computer extends StatefulWidget {
   Computer({super.key,});
@@ -32,6 +27,7 @@ class _ComputerState extends State<Computer> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
       body: SafeArea(
         child: Stack(
           children: [

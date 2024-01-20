@@ -1,7 +1,7 @@
 import 'package:Remedial_App/Computer Dept/Sem_1_sub/M_1.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../dash_bar.dart';
+import '../Screens/floating_bar.dart';
 
 class Sem extends StatelessWidget {
   const Sem({

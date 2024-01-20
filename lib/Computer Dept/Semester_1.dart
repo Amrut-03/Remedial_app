@@ -5,7 +5,7 @@ import 'package:Remedial_App/Exam_Screen/start_Sem_1/Start_screen_che.dart';
 import 'package:Remedial_App/Exam_Screen/start_Sem_1/Start_screen_m1.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../dash_bar.dart';
+import '../Screens/floating_bar.dart';
 
 class Semester_1 extends StatelessWidget {
   const Semester_1({

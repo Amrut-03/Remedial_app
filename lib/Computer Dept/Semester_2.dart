@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../Exam_Screen/start_Sem_2/start_screen_m2.dart';
-import '../dash_bar.dart';
+import '../Screens/floating_bar.dart';
 
 class Semester_2 extends StatefulWidget {
   const Semester_2({

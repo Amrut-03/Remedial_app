@@ -3,8 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  url_launcher_linux
-  window_to_front
+  file_selector_linux
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

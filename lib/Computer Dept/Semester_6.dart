@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../dash_bar.dart';
+import '../Screens/floating_bar.dart';
 
 class Semester_6 extends StatelessWidget {
   const Semester_6({

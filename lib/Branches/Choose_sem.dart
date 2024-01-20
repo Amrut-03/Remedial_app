@@ -10,7 +10,7 @@ import 'package:Remedial_App/Computer Dept/Semester_5.dart';
 import 'package:Remedial_App/Computer Dept/Semester_6.dart';
 import 'package:Remedial_App/Computer Dept/Semester_7.dart';
 
-import '../dash_bar.dart';
+import '../Screens/floating_bar.dart';
 class choose_Sem extends StatelessWidget {
 
   final String branch;

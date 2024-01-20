@@ -2,451 +2,480 @@ import 'package:Remedial_App/Branches/Civil.dart';
 import 'package:Remedial_App/Branches/Computer.dart';
 import 'package:Remedial_App/Branches/Electrical.dart';
 import 'package:Remedial_App/Branches/Mechanical.dart';
+import 'package:Remedial_App/Screens/profile.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
-import '../dash_bar.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 
 class Home_Screen extends StatefulWidget {
-  const Home_Screen({super.key});
+  Home_Screen({super.key});
 
   @override
   State<Home_Screen> createState() => _Home_ScreenState();
 }
 
 class _Home_ScreenState extends State<Home_Screen> {
-
+  var data;
   bool isLoding = true;
-  CarouselController carouselController = CarouselController();
-  @override
 
-  void initState() {
-    Future.delayed(Duration(seconds: 2),(){
-      setState(() {
-        isLoding = false;
-      });
+  get_user_data({required String docId}) async {
+    setState(() {
+      isLoding = true;
     });
+    data =
+        await FirebaseFirestore.instance.collection("users").doc(docId).get();
+    setState(() {
+      isLoding = false;
+    });
+  }
+
+  bool is_image = true;
+
+  user_image() {
+    setState(() {
+      if (data['gender'] == "male" || data['gender'] == "Male") {
+        is_image = false;
+      }
+    });
+  }
+
+  CarouselController carouselController = CarouselController();
+
+  String email = FirebaseAuth.instance.currentUser!.email.toString();
+
+  @override
+  void initState() {
+    get_user_data(docId: email);
     // TODO: implement initState
     super.initState();
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Column(
-            children:[
-              Visibility(visible: !isLoding,
+      backgroundColor: Colors.deepPurpleAccent,
+      bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.deepPurpleAccent,
+          color: Colors.black,
+          onTap: (index) async {
+            if (index == 0) {
+              await Future.delayed(Duration(milliseconds: 900));
+              Navigator.push(context, PageTransition(child: profilePage(), type:PageTransitionType.leftToRightWithFade,
+              duration: Duration(milliseconds: 600)));
+            } else if (index == 1) {
+              await Future.delayed(Duration(milliseconds: 900));
+              Navigator.pushReplacement(context, PageTransition(child: Home_Screen(), type:PageTransitionType.bottomToTop,
+                  duration: Duration(milliseconds: 600)));
+            }
+          },
+          items: [
+            Icon(Icons.person,color: Colors.white),
+            Icon(Icons.home, color: Colors.white),
+            Icon(Icons.settings, color: Colors.white),
+          ]),
+      body: Stack(children: [
+        Column(children: [
+          if (isLoding)
+            Shimmer.fromColors(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 30.h,bottom: 20.h,left: 10.w,right: 10.w),
+                  padding: EdgeInsets.only(
+                      top: 30.h, bottom: 10.h, left: 10.w, right: 10.w),
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(10.h),
-                    child: Container(
-                      height: 150.h,
-                      width: 400.w,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.all(Radius.circular(15.r)),
-                        boxShadow: [BoxShadow(
-                          color: Colors.deepPurpleAccent,
-                          blurRadius: 6.r,
-                          spreadRadius: 2.r,
-                        )]
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      shimmer_padding(
+                          right: 10.w,
+                          left: 10.w,
+                          top: 10.h,
+                          bottom: 10.h,
+                          height: 150.h,
+                          width: 370.w),
+                      shimmer_padding(
+                          right: 10.w,
+                          left: 20.w,
+                          top: 0.h,
+                          bottom: 0.h,
+                          height: 50.h,
+                          width: 370.w),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding:EdgeInsets.all(8.0.h),
-                            child: Container(
-                              height: 100.h,
-                              width: 100.w,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                borderRadius: BorderRadius.all(Radius.circular(15.r)),
-                                boxShadow: [BoxShadow(
-                                  color: Colors.deepPurpleAccent,
-                                  blurRadius: 6.r,
-                                  spreadRadius: 2.r,
-                                )]
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.all(Radius.circular(15.r)),
-                                  child: Image.asset("images/icons/profile.png",)
-                              )
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.all(10.h),
-                          child: Container(
-                            height: 100.h,
-                            width: 200.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                              boxShadow: [BoxShadow(
-                                color: Colors.deepPurpleAccent,
-                                blurRadius: 6.r,
-                                spreadRadius: 2.r,
-                              )]
-                            ),
-                            child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 5.w,vertical: 5.h),
-                                    child: Text("Name: Amrut Khochikar",style: GoogleFonts.roboto(
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 15.w),
-                                    child: Text("Branch: Computer Science and Engineering",style: GoogleFonts.roboto(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+                          shimmer_padding(
+                              right: 10.w,
+                              left: 10.w,
+                              top: 10.h,
+                              bottom: 10.w,
+                              height: 170.h,
+                              width: 350.w),
                         ],
                       ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(5),
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 55,left: 55,top: 10,bottom: 10),
-                      child: Text("WelCome For Preparation",style: GoogleFonts.roboto(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      shimmer_padding(
+                          right: 20.w,
+                          left: 20.w,
+                          top: 0.h,
+                          bottom: 0.h,
+                          height: 50.h,
+                          width: 370.w),
+                      SizedBox(
+                        height: 10.h,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          shimmer_padding(
+                              right: 20.w,
+                              left: 30.w,
+                              top: 0.h,
+                              bottom: 0.h,
+                              height: 70.h,
+                              width: 150.w),
+                          shimmer_padding(
+                              right: 20.w,
+                              left: 30.w,
+                              top: 0.h,
+                              bottom: 0.h,
+                              height: 70.h,
+                              width: 150.w),
+                        ],
                       ),
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.black,
-                        boxShadow: [BoxShadow(
-                            spreadRadius: 2,
-                            color: Colors.deepPurpleAccent,
-                            blurRadius: 6
-                        )]
-                    ),
-                  ),
-                  Container(
-                    height: 180,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: CarouselSlider(
-                      items: [
-                        Image.asset("images/icons/quize.png", fit: BoxFit.cover),
-                        Image.asset("images/icons/quize1.png", fit: BoxFit.cover),
-                        Image.asset("images/icons/quize2.png", fit: BoxFit.cover),
-                        Image.asset("images/icons/quize3.png", fit: BoxFit.contain),
-                        Image.asset("images/icons/quize4.png", fit: BoxFit.cover),
-                      ],
-                      options: CarouselOptions(
-                        height: 170,
-                        aspectRatio: 16 / 9,
-                        viewportFraction: 0.8,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        reverse: false,
-                        autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 3),
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        scrollDirection: Axis.horizontal,
+                      SizedBox(
+                        height: 10.h,
                       ),
-                      carouselController: carouselController,
-                    ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          shimmer_padding(
+                              right: 20.w,
+                              left: 30.w,
+                              top: 0.h,
+                              bottom: 0.h,
+                              height: 70.h,
+                              width: 150.w),
+                          shimmer_padding(
+                              right: 20.w,
+                              left: 30.w,
+                              top: 0.h,
+                              bottom: 0.h,
+                              height: 70.h,
+                              width: 150.w),
+                        ],
+                      ),
+                    ],
                   ),
-                  Padding(padding: EdgeInsets.all(10),
-                    child: Container(
-                      height: 60,
-                      width: 350,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                baseColor: Colors.grey.shade500,
+                highlightColor: Colors.grey.shade100)
+          else
+            Visibility(
+              visible: !isLoding,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 30.h, bottom: 20.h, left: 10.w, right: 10.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: 10.h, left: 10.w, right: 10.w),
+                      child: Container(
+                        height: 130.h,
+                        width: 350.w,
+                        decoration: BoxDecoration(
                           color: Colors.black,
-                          boxShadow: [BoxShadow(
-                              color: Colors.deepPurpleAccent,
-                              spreadRadius: 2,
-                              blurRadius: 6
-                          )]
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Choose your Branch",style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontSize: 25
+                          borderRadius: BorderRadius.all(Radius.circular(15.r)),
                         ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Computer()));
-                              },
+                            Padding(
+                              padding: EdgeInsets.all(8.0.h),
                               child: Container(
-                                height: 80,
-                                width: 170,
+                                height: 100.h,
+                                width: 100.w,
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                                    boxShadow: [BoxShadow(
-                                        color: Colors.deepPurpleAccent,
-                                        spreadRadius: 2,
-                                        blurRadius: 6
-                                    )]
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.r)),
                                 ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 30,right: 20),
-                                    child: Text("Computer Engineering",style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    ),),
-                                  ),
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.r)),
+                                  child: !is_image
+                                      ? Image.asset(
+                                          "images/icons/male_profile.png",
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          "images/icons/female_profile.png",
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Mechanical()));
-                              },
+                            Padding(
+                              padding: EdgeInsets.all(10.h),
                               child: Container(
-                                height: 80,
-                                width: 170,
+                                height: 100.h,
+                                width: 200.w,
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                                  boxShadow: [BoxShadow(
-                                    color: Colors.deepPurpleAccent,
-                                    spreadRadius: 2,
-                                    blurRadius: 6,
-                                  )]
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.r)),
                                 ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 30,right: 20),
-                                    child: Text("Mechanical Engineering",style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    ),),
-                                  ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5.w, vertical: 5.h),
+                                      child: isLoding
+                                          ? Text(" ")
+                                          : Text(
+                                              "Name: " + data["name"],
+                                              style: GoogleFonts.roboto(
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 15.w),
+                                      child: Text(
+                                        "Department:" + data["department"],
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Container(
+                      margin: EdgeInsets.all(5.w),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            right: 55.w, left: 55.w, top: 10.h, bottom: 10.h),
+                        child: Text(
+                          "WelCome For Preparation",
+                          style: GoogleFonts.roboto(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Container(
+                      height: 180.h,
+                      width: 350.w,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
+                      child: CarouselSlider(
+                        items: [
+                          Image.asset("images/icons/quize.png",
+                              fit: BoxFit.cover),
+                          Image.asset("images/icons/quize1.png",
+                              fit: BoxFit.cover),
+                          Image.asset("images/icons/quize2.png",
+                              fit: BoxFit.cover),
+                          Image.asset("images/icons/quize3.png",
+                              fit: BoxFit.contain),
+                          Image.asset("images/icons/quize4.png",
+                              fit: BoxFit.cover),
+                        ],
+                        options: CarouselOptions(
+                          height: 170.h,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                        ),
+                        carouselController: carouselController,
+                      ),
+                    ),
+                    SizedBox(height: 20.h),
+                    branch_widget(
+                      fonsize: 20.sp,
+                      branch_name: 'Choose Your Branch',
+                      onclick: () {},
+                      height: 50.h,
+                      width: 350.w,
+                    ),
+                    SizedBox(height: 10.h),
+                    Column(
+                      children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+                          padding: EdgeInsets.only(
+                              left: 20.w, right: 20.w, bottom: 10.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Civil()));
+                              branch_widget(
+                                fonsize: 15.sp,
+                                branch_name: 'Computer Science Engineering',
+                                height: 70.h,
+                                width: 150.w,
+                                onclick: () {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(child: Computer(),
+                                        type: PageTransitionType.bottomToTop,
+                                        duration: Duration(milliseconds: 400),
+                                      ));
                                 },
-                                  child: Container(
-                                    height: 80,
-                                    width: 170,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                                      boxShadow: [BoxShadow(
-                                        color: Colors.deepPurpleAccent,
-                                        spreadRadius: 2,
-                                        blurRadius: 6
-                                      )]
-                                    ),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 30,right: 20),
-                                        child: Text("Civil Engineering",style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                        ),),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              InkWell(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder:(context)=>Electrical()));
+                              ),
+                              SizedBox(width: 10.w),
+                              branch_widget(
+                                fonsize: 15.sp,
+                                branch_name: 'Mechanical Engineering',
+                                height: 70.h,
+                                width: 150.w,
+                                onclick: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Mechanical()));
                                 },
-                                child: Container(
-                                  height: 80,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                                      boxShadow: [BoxShadow(
-                                          color: Colors.deepPurpleAccent,
-                                          spreadRadius: 2,
-                                          blurRadius: 6
-                                      )]
-                                  ),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 30,right: 20),
-                                      child: Text("Electrical Engineering",style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                      ),),
-                                    ),
-                                  ),
-                                ),
                               ),
                             ],
                           ),
                         ),
-                    ],
-                  )
-                ],
-                            ),
-                      ),
-              ),
-              if(isLoding)
-              Shimmer.fromColors(child:
-              Padding(
-                padding: EdgeInsets.only(top: 30.h,bottom: 10.h,left: 10.w,right: 10),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Container(
-                        height: 150.h,
-                        width: 400.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white
-                        ),
-                      ),
-                    ),
-                    Padding(padding: EdgeInsets.only(bottom: 20,left: 15,right: 15),
-                    child: Container(
-                      height: 50,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white
-                      ),
-                    ),),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10,left: 10,bottom: 10),
-                          child: Container(
-                            height: 170,
-                            width: 170,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.white
-                            ),
+                          padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              branch_widget(
+                                fonsize: 15.sp,
+                                branch_name: 'Civil Engineering',
+                                height: 70.h,
+                                width: 150.w,
+                                onclick: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Civil()));
+                                },
+                              ),
+                              SizedBox(width: 10.w),
+                              branch_widget(
+                                branch_name: 'Electrical Engineering',
+                                height: 70.h,
+                                width: 150.w,
+                                onclick: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Electrical()));
+                                },
+                                fonsize: 15.sp,
+                              ),
+                            ],
                           ),
                         ),
-                        Padding(padding: EdgeInsets.only(top: 10,right: 10,bottom: 10),
-                          child: Container(
-                            height: 170,
-                            width: 170,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white
-                            ),
-                          ),),
                       ],
-                    ),
-                    Padding(padding: EdgeInsets.only(left: 20,right: 20),
-                    child: Container(
-                      height: 60,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white
-                      ),
-                    ),),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(padding: EdgeInsets.only(left: 20,top: 10,bottom: 10),
-                          child: Container(
-                            height: 80,
-                            width: 170,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                          ),),
-                          Padding(padding: EdgeInsets.only(right: 20,top: 10,bottom: 10),
-                            child: Container(
-                              height: 80,
-                              width: 170,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                              ),
-                            ),),
-                        ],
-                      ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(padding: EdgeInsets.only(left: 20,top: 10,bottom: 0),
-                          child: Container(
-                            height: 80,
-                            width: 170,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                          ),),
-                        Padding(padding: EdgeInsets.only(right: 20,top: 10,bottom: 10),
-                          child: Container(
-                            height: 80,
-                            width: 170,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                          ),),
-                      ],
-                    ),
+                    )
                   ],
                 ),
-              ), baseColor: Colors.grey.shade300, highlightColor: Colors.grey.shade100),
-              dash_bar()
-    ]
-          ),
-    ]
+              ),
+            ),
+        ]),
+      ]),
+    );
+  }
+
+  Padding shimmer_padding(
+      {required double height,
+      required double width,
+      required double right,
+      required double left,
+      required double top,
+      required double bottom}) {
+    return Padding(
+      padding: EdgeInsets.only(right: right, top: top, bottom: bottom),
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.r),
+          color: Colors.white,
+        ),
       ),
     );
   }
 }
 
+class branch_widget extends StatelessWidget {
+  branch_widget({
+    super.key,
+    required this.branch_name,
+    required this.onclick,
+    required this.height,
+    required this.width,
+    required this.fonsize,
+  });
+
+  final String branch_name;
+  final VoidCallback onclick;
+  final double height;
+  final double width;
+  final double fonsize;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onclick,
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.all(Radius.circular(15.r)),
+        ),
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.only(left: 30.w, right: 20.w),
+            child: Text(
+              branch_name,
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.bold,
+                fontSize: fonsize.sp,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

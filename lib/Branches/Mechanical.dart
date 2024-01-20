@@ -1,4 +1,4 @@
-import 'package:Remedial_App/dash_bar.dart';
+import 'package:Remedial_App/Screens/floating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Mechanical Dept/Semester_1.dart';

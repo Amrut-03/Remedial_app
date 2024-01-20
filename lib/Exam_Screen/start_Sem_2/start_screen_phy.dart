@@ -1,4 +1,4 @@
-import 'package:Remedial_App/Exam_Screen/Exam_interface.dart';
+import 'package:Remedial_App/Exam_Screen/sem2_physics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +14,7 @@ class start_screen_phy extends StatelessWidget {
         color: Colors.black,
         child: InkWell(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Exam_interface()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>ExamPhysics(sem_num: 'sem2',subject: 'physics' ,)));
           },
           child: Center(
             child: Container(

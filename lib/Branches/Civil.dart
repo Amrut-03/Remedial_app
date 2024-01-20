@@ -8,7 +8,7 @@ import 'package:Remedial_App/Civil_Dept/Semester_5.dart';
 import 'package:Remedial_App/Civil_Dept/Semester_6.dart';
 import 'package:Remedial_App/Civil_Dept/Semester_7.dart';
 
-import '../dash_bar.dart';
+import '../Screens/floating_bar.dart';
 
 class Civil extends StatefulWidget {
   Civil({super.key,});

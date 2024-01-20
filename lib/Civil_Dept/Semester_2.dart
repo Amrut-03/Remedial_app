@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../Branches/Computer.dart';
-import '../Computer Dept/Sem.dart';
-import '../dash_bar.dart';
 
 class Semester_2 extends StatefulWidget {
   const Semester_2({super.key});

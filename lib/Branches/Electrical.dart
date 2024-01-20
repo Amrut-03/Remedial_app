@@ -7,7 +7,7 @@ import 'package:Remedial_App/Electrical Dept/Semester_4.dart';
 import 'package:Remedial_App/Electrical Dept/Semester_5.dart';
 import 'package:Remedial_App/Electrical Dept/Semester_6.dart';
 import 'package:Remedial_App/Electrical Dept/Semester_7.dart';
-import '../dash_bar.dart';
+import '../Screens/floating_bar.dart';
 
 class Electrical extends StatefulWidget {
   Electrical({super.key,});
