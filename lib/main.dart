@@ -1,5 +1,6 @@
 import 'package:Remedial_App/Screens/Onboarding.dart';
 import 'package:Remedial_App/Screens/Home_screen.dart';
+import 'package:Remedial_App/Screens/splash_screen.dart';
 import 'package:Remedial_App/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,16 +28,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: GoogleFonts.ubuntu().fontFamily,
           ),
-          home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Home_Screen();
-              } else {
-                return Onboarding();
-              }
-            },
-          ),
+          home: splash(),
         );
       },
     );

@@ -42,6 +42,9 @@ class _Forgot_screenState extends State<Forgot_screen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -78,7 +81,7 @@ class _Forgot_screenState extends State<Forgot_screen> {
                     height: 500.h,
                     width: 450.w,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.deepPurpleAccent,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30.r),
                         topRight: Radius.circular(30.r),
@@ -92,37 +95,32 @@ class _Forgot_screenState extends State<Forgot_screen> {
                       ),
                       child: Column(
                         children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                  bottom:
-                                      BorderSide(color: Colors.grey.shade200)),
+                          TextField(
+                            style: TextStyle(
+                              color: Colors.white,
                             ),
-                            child: TextField(
-                              controller: email_con,
-                              decoration: InputDecoration(
-                                constraints: BoxConstraints(
-                                  maxHeight: 60.h,
-                                ),
-                                labelText: 'Enter Email',
-                                labelStyle: GoogleFonts.poppins(
-                                  fontSize: 15.sp,
-                                  color: Colors.grey,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2.w)),
-                                focusedBorder: OutlineInputBorder(
+                            controller: email_con,
+                            decoration: InputDecoration(
+                              constraints: BoxConstraints(
+                                maxHeight: 60.h,
+                              ),
+                              labelText: 'Enter Email',
+                              labelStyle: GoogleFonts.poppins(
+                                fontSize: 15.sp,
+                                color: Colors.white,
+                              ),
+                              enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.r),
                                   borderSide: BorderSide(
-                                    color: Colors.deepPurpleAccent,
-                                    width: 2.w,
-                                  ),
+                                      color: Colors.white, width: 1.w)),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1.w,
                                 ),
-                                prefixIcon: Icon(Icons.email),
                               ),
+                              prefixIcon: Icon(Icons.email,color: Colors.white,),
                             ),
                           ),
                           SizedBox(height: 40.h),

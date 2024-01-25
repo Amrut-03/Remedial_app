@@ -1,12 +1,21 @@
-import 'package:Remedial_App/Screens/floating_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:Remedial_App/Computer Dept/Semester_3.dart';
+import 'package:Remedial_App/Computer Dept/Semester_4.dart';
+import 'package:Remedial_App/Computer Dept/Semester_5.dart';
+import 'package:Remedial_App/Computer Dept/Semester_6.dart';
+import 'package:Remedial_App/Computer Dept/Semester_7.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
-import '../Computer Dept/Semester_1.dart';
 import '../Computer Dept/Semester_2.dart';
+import '../Computer Dept/Semester_1.dart';
+import '../Screens/Home_screen.dart';
 
 class Computer extends StatefulWidget {
-  Computer({super.key,});
+  Computer({
+    super.key,
+  });
 
   @override
   State<Computer> createState() => _ComputerState();
@@ -25,174 +34,232 @@ class _ComputerState extends State<Computer> {
       });
     });
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurpleAccent,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(padding: EdgeInsets.only(bottom: 20),
-                    child: Stack(
-                      children:[
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.deepPurpleAccent,
+          color: Colors.black,
+          onTap: (index) async {
+            if (index == 0) {
+              await Future.delayed(Duration(milliseconds: 900));
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: Home_Screen(),
+                      type: PageTransitionType.leftToRight,
+                      duration: Duration(milliseconds: 600)));
+            } else if (index == 1) {
+              await Future.delayed(Duration(milliseconds: 900));
+              Navigator.pushReplacement(
+                  context,
+                  PageTransition(
+                      child: Home_Screen(),
+                      type: PageTransitionType.bottomToTop,
+                      duration: Duration(milliseconds: 600)));
+            }
+          },
+          items: [
+            Icon(Icons.arrow_back, color: Colors.white),
+            Icon(Icons.home, color: Colors.white),
+            Icon(Icons.settings, color: Colors.white),
+          ],
+        ),
+        backgroundColor: Colors.deepPurpleAccent,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: Stack(children: [
                         Visibility(
                           visible: !isLoading,
                           child: Container(
                             height: 200,
                             width: 350,
                             child: ClipRRect(
-                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
                                 child: Stack(
                                   children: [
-                                    Image.asset("images/Backgrounds/back1.png",fit: BoxFit.cover,),
+                                    Image.asset(
+                                      "images/Backgrounds/back1.png",
+                                      fit: BoxFit.cover,
+                                    ),
                                     Padding(
-                                      padding: EdgeInsets.only(top: 80,left:20,right: 20,bottom: 40),
-                                      child: Text("Computer Science and Engineering",style: GoogleFonts.poppins(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black
-                                      ),),
+                                      padding: EdgeInsets.only(
+                                          top: 80,
+                                          left: 20,
+                                          right: 20,
+                                          bottom: 40),
+                                      child: Text(
+                                        "Computer Science and Engineering",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
                                     )
                                   ],
-                                )
-                            ),
+                                )),
                           ),
                         ),
-                        if(isLoading)
+                        if (isLoading)
                           Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
+                            highlightColor: Colors.grey.shade100,
+                            baseColor: Colors.grey.shade500,
                             child: Container(
                               height: 200,
                               width: 350,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white, // Use a background color matching your design
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                color: Colors
+                                    .white, // Use a background color matching your design
                               ),
                             ),
                           ),
-                    ]
-                    ),),
-
-                  Stack(
-                    children:[
-
-                    Visibility(
-                      visible: !isLoading,
-                      child: Padding(padding: EdgeInsets.all(20),
-                        child: Container(
-                          height: 60,
-                          width: 350,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              color: Colors.black,
-                              boxShadow: [BoxShadow(
-                                  color: Colors.deepPurpleAccent,
-                                  spreadRadius: 2,
-                                  blurRadius: 6
-                              )]
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Choose your Semester",style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontSize: 25
-                            ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      ]),
                     ),
-                      if(isLoading)
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Shimmer.fromColors(child: Container(
+                    Stack(children: [
+                      Visibility(
+                        visible: !isLoading,
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Container(
                             height: 60,
                             width: 350,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                          ), baseColor: Colors.grey.shade300, highlightColor: Colors.grey.shade100),
-                        )
-                  ]
-                  ),
-                  Stack(
-                    children:[
-                      Visibility(
-                      visible: !isLoading,
-                        child: Padding(
-                        padding: const EdgeInsets.only(left: 30,right: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester_1()));
-                              },
-                              child: Container(
-                                height: 60,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                                    boxShadow: [BoxShadow(
-                                        color: Colors.deepPurpleAccent,
-                                        spreadRadius: 2,
-                                        blurRadius: 6
-                                    )]
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 30,right: 20),
-                                    child: Text("1 Semester",style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    ),),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester_2()));
-                              },
-                              child: Container(
-                                height: 60,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                                    boxShadow: [BoxShadow(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.black,
+                                boxShadow: [
+                                  BoxShadow(
                                       color: Colors.deepPurpleAccent,
                                       spreadRadius: 2,
-                                      blurRadius: 6,
-                                    )]
+                                      blurRadius: 6)
+                                ]),
+                            child: Center(
+                              child: Text(
+                                "Choose your Semester",
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                    fontSize: 25),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (isLoading)
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Shimmer.fromColors(
+                              child: Container(
+                                height: 60,
+                                width: 350,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
                                 ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 30,right: 20),
-                                    child: Text("2 Semester",style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    ),),
+                              ),
+                            highlightColor: Colors.grey.shade100,
+                            baseColor: Colors.grey.shade500,),
+                        )
+                    ]),
+                    Stack(children: [
+                      Visibility(
+                        visible: !isLoading,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => semester_1()));
+                                },
+                                child: Container(
+                                  height: 60,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.deepPurpleAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 6)
+                                      ]),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 30, right: 20),
+                                      child: Text(
+                                        "1 Semester",
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Semester_2()));
+                                },
+                                child: Container(
+                                  height: 60,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.deepPurpleAccent,
+                                          spreadRadius: 2,
+                                          blurRadius: 6,
+                                        )
+                                      ]),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 30, right: 20),
+                                      child: Text(
+                                        "2 Semester",
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                                            ),
                       ),
-                      if(isLoading)
+                      if (isLoading)
                         Shimmer.fromColors(
-                          child: Padding(padding: EdgeInsets.only(left: 30,right: 30),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 30, right: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -216,247 +283,90 @@ class _ComputerState extends State<Computer> {
                             ),
                           ),
                           highlightColor: Colors.grey.shade100,
-                          baseColor: Colors.grey.shade300,
+                          baseColor: Colors.grey.shade500,
                         )
-                  ]
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Stack(
-                        children:[
-                          Visibility(
-                            visible: !isLoading,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 30,right: 30),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester_1()));
-                                    },
-                                    child: Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                                          boxShadow: [BoxShadow(
-                                              color: Colors.deepPurpleAccent,
-                                              spreadRadius: 2,
-                                              blurRadius: 6
-                                          )]
-                                      ),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(left: 30,right: 20),
-                                          child: Text("3 Semester",style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                          ),),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester_2()));
-                                    },
-                                    child: Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                                          boxShadow: [BoxShadow(
-                                            color: Colors.deepPurpleAccent,
-                                            spreadRadius: 2,
-                                            blurRadius: 6,
-                                          )]
-                                      ),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(left: 30,right: 20),
-                                          child: Text("4 Semester",style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                          ),),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          if(isLoading)
-                            Shimmer.fromColors(
-                              child: Padding(padding: EdgeInsets.only(left: 30,right: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              highlightColor: Colors.grey.shade100,
-                              baseColor: Colors.grey.shade300,
-                            )
-                        ]
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Stack(
-                        children:[
-                          Visibility(
-                            visible: !isLoading,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 30,right: 30),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester_1()));
-                                    },
-                                    child: Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                                          boxShadow: [BoxShadow(
-                                              color: Colors.deepPurpleAccent,
-                                              spreadRadius: 2,
-                                              blurRadius: 6
-                                          )]
-                                      ),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(left: 30,right: 20),
-                                          child: Text("5 Semester",style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                          ),),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester_2()));
-                                    },
-                                    child: Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                                          boxShadow: [BoxShadow(
-                                            color: Colors.deepPurpleAccent,
-                                            spreadRadius: 2,
-                                            blurRadius: 6,
-                                          )]
-                                      ),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(left: 30,right: 20),
-                                          child: Text("6 Semester",style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                          ),),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          if(isLoading)
-                            Shimmer.fromColors(
-                              child: Padding(padding: EdgeInsets.only(left: 30,right: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 60,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              highlightColor: Colors.grey.shade100,
-                              baseColor: Colors.grey.shade300,
-                            )
-                        ]
-                    ),
-                  ),
-                  Stack(
-                      children:[
+                    ]),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Stack(children: [
                         Visibility(
                           visible: !isLoading,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 30,right: 30),
+                            padding: const EdgeInsets.only(left: 30, right: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 InkWell(
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester_2()));
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Semester_3()));
                                   },
                                   child: Container(
                                     height: 60,
                                     width: 150,
                                     decoration: BoxDecoration(
                                         color: Colors.black,
-                                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                                        boxShadow: [BoxShadow(
-                                          color: Colors.deepPurpleAccent,
-                                          spreadRadius: 2,
-                                          blurRadius: 6,
-                                        )]
-                                    ),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.deepPurpleAccent,
+                                              spreadRadius: 2,
+                                              blurRadius: 6)
+                                        ]),
                                     child: Center(
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 30,right: 20),
-                                        child: Text("7 Semester",style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                        ),),
+                                        padding: const EdgeInsets.only(
+                                            left: 30, right: 20),
+                                        child: Text(
+                                          "3 Semester",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Semester_4()));
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.deepPurpleAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 6,
+                                          )
+                                        ]),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 30, right: 20),
+                                        child: Text(
+                                          "4 Semester",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -465,12 +375,22 @@ class _ComputerState extends State<Computer> {
                             ),
                           ),
                         ),
-                        if(isLoading)
+                        if (isLoading)
                           Shimmer.fromColors(
-                            child: Padding(padding: EdgeInsets.only(left: 30,right: 30),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 30, right: 30),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Container(
+                                    height: 60,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
                                   Container(
                                     height: 60,
                                     width: 150,
@@ -483,19 +403,207 @@ class _ComputerState extends State<Computer> {
                               ),
                             ),
                             highlightColor: Colors.grey.shade100,
-                            baseColor: Colors.grey.shade300,
+                            baseColor: Colors.grey.shade500,
                           )
-                      ]
-                  ),
-                  SizedBox(height: 20,),
-                  dash_bar(),
-                ],
+                      ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Stack(children: [
+                        Visibility(
+                          visible: !isLoading,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30, right: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Semester_5()));
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.deepPurpleAccent,
+                                              spreadRadius: 2,
+                                              blurRadius: 6)
+                                        ]),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 30, right: 20),
+                                        child: Text(
+                                          "5 Semester",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Semester_6()));
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.deepPurpleAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 6,
+                                          )
+                                        ]),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 30, right: 20),
+                                        child: Text(
+                                          "6 Semester",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        if (isLoading)
+                          Shimmer.fromColors(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 30, right: 30),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    height: 60,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 60,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            highlightColor: Colors.grey.shade100,
+                            baseColor: Colors.grey.shade500,
+                          )
+                      ]),
+                    ),
+                    Stack(children: [
+                      Visibility(
+                        visible: !isLoading,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Semester_7()));
+                                },
+                                child: Container(
+                                  height: 60,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.deepPurpleAccent,
+                                          spreadRadius: 2,
+                                          blurRadius: 6,
+                                        )
+                                      ]),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 30, right: 20),
+                                      child: Text(
+                                        "7 Semester",
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if (isLoading)
+                        Shimmer.fromColors(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 30, right: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: 60,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          highlightColor: Colors.grey.shade100,
+                          baseColor: Colors.grey.shade500,
+                        )
+                    ]),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      )
-    );
+            ],
+          ),
+        ));
   }
 }
-

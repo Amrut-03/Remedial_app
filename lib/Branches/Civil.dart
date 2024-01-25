@@ -7,7 +7,6 @@ import 'package:Remedial_App/Civil_Dept/Semester_4.dart';
 import 'package:Remedial_App/Civil_Dept/Semester_5.dart';
 import 'package:Remedial_App/Civil_Dept/Semester_6.dart';
 import 'package:Remedial_App/Civil_Dept/Semester_7.dart';
-
 import '../Screens/floating_bar.dart';
 
 class Civil extends StatefulWidget {

@@ -3,14 +3,13 @@ import 'package:Remedial_App/Branches/Computer.dart';
 import 'package:Remedial_App/Branches/Electrical.dart';
 import 'package:Remedial_App/Branches/Mechanical.dart';
 import 'package:Remedial_App/Screens/profile.dart';
+import 'package:Remedial_App/Setting_Screen/setting_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
@@ -26,6 +25,7 @@ class Home_Screen extends StatefulWidget {
 class _Home_ScreenState extends State<Home_Screen> {
   var data;
   bool isLoding = true;
+  bool is_image = true;
 
   get_user_data({required String docId}) async {
     setState(() {
@@ -36,16 +36,14 @@ class _Home_ScreenState extends State<Home_Screen> {
     setState(() {
       isLoding = false;
     });
+    user_image();
   }
 
-  bool is_image = true;
-
   user_image() {
+    if (data['gender'] == "male" || data['gender'] == "Male"){
     setState(() {
-      if (data['gender'] == "male" || data['gender'] == "Male") {
-        is_image = false;
-      }
-    });
+      is_image = false;
+    });}
   }
 
   CarouselController carouselController = CarouselController();
@@ -69,17 +67,22 @@ class _Home_ScreenState extends State<Home_Screen> {
           onTap: (index) async {
             if (index == 0) {
               await Future.delayed(Duration(milliseconds: 900));
-              Navigator.push(context, PageTransition(child: profilePage(), type:PageTransitionType.leftToRightWithFade,
-              duration: Duration(milliseconds: 600)));
+              Navigator.pushReplacement(context, PageTransition(child: Home_Screen(), type:PageTransitionType.leftToRight,
+                  duration: Duration(milliseconds: 300)));
             } else if (index == 1) {
               await Future.delayed(Duration(milliseconds: 900));
-              Navigator.pushReplacement(context, PageTransition(child: Home_Screen(), type:PageTransitionType.bottomToTop,
+              Navigator.pushReplacement(context, PageTransition(child: profilePage(), type:PageTransitionType.bottomToTop,
+                  duration: Duration(milliseconds: 600)));
+            }
+            else if (index == 2) {
+              await Future.delayed(Duration(milliseconds: 900));
+              Navigator.pushReplacement(context, PageTransition(child: setting(), type:PageTransitionType.rightToLeft,
                   duration: Duration(milliseconds: 600)));
             }
           },
           items: [
+            Icon(Icons.arrow_back, color: Colors.white),
             Icon(Icons.person,color: Colors.white),
-            Icon(Icons.home, color: Colors.white),
             Icon(Icons.settings, color: Colors.white),
           ]),
       body: Stack(children: [
@@ -88,16 +91,17 @@ class _Home_ScreenState extends State<Home_Screen> {
             Shimmer.fromColors(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: 30.h, bottom: 10.h, left: 10.w, right: 10.w),
+                      top: 30.h, bottom: 20.h, left: 20.w, right: 10.w),
                   child: Column(
                     children: [
                       shimmer_padding(
                           right: 10.w,
                           left: 10.w,
                           top: 10.h,
-                          bottom: 10.h,
-                          height: 150.h,
-                          width: 370.w),
+                          bottom: 0.h,
+                          height: 130.h,
+                          width: 350.w),
+                      SizedBox(height: 10,),
                       shimmer_padding(
                           right: 10.w,
                           left: 20.w,
@@ -171,8 +175,8 @@ class _Home_ScreenState extends State<Home_Screen> {
                     ],
                   ),
                 ),
-                baseColor: Colors.grey.shade500,
-                highlightColor: Colors.grey.shade100)
+              highlightColor: Colors.grey.shade100,
+              baseColor: Colors.grey.shade500,)
           else
             Visibility(
               visible: !isLoding,
@@ -208,13 +212,13 @@ class _Home_ScreenState extends State<Home_Screen> {
                                 child: ClipRRect(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15.r)),
-                                  child: !is_image
+                                  child: is_image
                                       ? Image.asset(
-                                          "images/icons/male_profile.png",
+                                          "images/icons/female_profile.png",
                                           fit: BoxFit.cover,
                                         )
                                       : Image.asset(
-                                          "images/icons/female_profile.png",
+                                          "images/icons/male_profile.png",
                                           fit: BoxFit.cover,
                                         ),
                                 ),
@@ -224,7 +228,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                               padding: EdgeInsets.all(10.h),
                               child: Container(
                                 height: 100.h,
-                                width: 200.w,
+                                width: 205.w,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
@@ -233,8 +237,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 5.w, vertical: 5.h),
+                                      padding: EdgeInsets.all(5),
                                       child: isLoding
                                           ? Text(" ")
                                           : Text(
@@ -273,7 +276,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                         child: Text(
                           "WelCome For Preparation",
                           style: GoogleFonts.roboto(
-                            fontSize: 20.sp,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -294,6 +297,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                       ),
                       child: CarouselSlider(
                         items: [
+                          Text("Physics Test is Currently Available"),
                           Image.asset("images/icons/quize.png",
                               fit: BoxFit.cover),
                           Image.asset("images/icons/quize1.png",
@@ -341,7 +345,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               branch_widget(
-                                fonsize: 15.sp,
+                                fonsize: 12.sp,
                                 branch_name: 'Computer Science Engineering',
                                 height: 70.h,
                                 width: 150.w,
@@ -356,7 +360,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                               ),
                               SizedBox(width: 10.w),
                               branch_widget(
-                                fonsize: 15.sp,
+                                fonsize: 12.sp,
                                 branch_name: 'Mechanical Engineering',
                                 height: 70.h,
                                 width: 150.w,
@@ -376,7 +380,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               branch_widget(
-                                fonsize: 15.sp,
+                                fonsize: 12.sp,
                                 branch_name: 'Civil Engineering',
                                 height: 70.h,
                                 width: 150.w,
@@ -398,7 +402,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                                       MaterialPageRoute(
                                           builder: (context) => Electrical()));
                                 },
-                                fonsize: 15.sp,
+                                fonsize: 12.sp,
                               ),
                             ],
                           ),

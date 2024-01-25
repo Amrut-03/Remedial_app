@@ -84,6 +84,9 @@ class _New_accountState extends State<New_account> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
@@ -104,7 +107,7 @@ class _New_accountState extends State<New_account> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.deepPurpleAccent,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40.r),
                     topRight: Radius.circular(40.r),
@@ -116,47 +119,40 @@ class _New_accountState extends State<New_account> {
                     SizedBox(height: 30.h),
                     resusable_TextField(
                       name_con: name_con,
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.person,color: Colors.white,),
                       input: 'Enter Full Name',
                     ),
                     SizedBox(height: 20.h),
                     resusable_TextField(
                       name_con: email_con,
-                      icon: Icon(Icons.email),
+                      icon: Icon(Icons.email,color: Colors.white,),
                       input: 'Enter email',
                     ),
                     SizedBox(height: 20.h),
                     resusable_TextField(
                       name_con: phone_con,
-                      icon: Icon(Icons.phone),
+                      icon: Icon(Icons.phone,color: Colors.white,),
                       input: 'Phone Number',
                     ),
                     SizedBox(height: 20.h),
                     resusable_TextField(
                       name_con: department_con,
-                      icon: Icon(Icons.holiday_village),
+                      icon: Icon(Icons.holiday_village,color: Colors.white,),
                       input: 'Department Name',
                     ),
                     SizedBox(height: 20.h),
                     resusable_TextField(
                       name_con: gender_con,
-                      icon: Icon(Icons.male),
+                      icon: Icon(Icons.male,color: Colors.white,),
                       input: 'Gender',
                     ),
                     SizedBox(height: 20.h),
-                    resusable_TextField(
-                      name_con: gender_con,
-                      icon: Icon(Icons.male),
-                      input: 'Gender',
-                    ),
-                    SizedBox(height: 20.h),
-                    Container(
-                      padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                      decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(color: Colors.grey.shade200)),
-                      ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10,right: 10),
                       child: TextField(
+                        style: TextStyle(
+                            color: Colors.white
+                        ),
                         obscureText: is_hide,
                         controller: pass_con,
                         decoration: InputDecoration(
@@ -166,19 +162,19 @@ class _New_accountState extends State<New_account> {
                           labelText: 'New Password',
                           labelStyle: GoogleFonts.poppins(
                             fontSize: 15.sp,
-                            color: Colors.grey,
+                            color: Colors.white,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
                               borderSide:
-                                  BorderSide(color: Colors.black, width: 2.w)),
+                                  BorderSide(color: Colors.white, width: 1.w)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
                               borderSide: BorderSide(
-                                color: Colors.deepPurpleAccent,
-                                width: 2.w,
+                                color: Colors.black,
+                                width: 1.w,
                               )),
-                          prefixIcon: Icon(Icons.key),
+                          prefixIcon: Icon(Icons.key,color: Colors.white,),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -186,20 +182,19 @@ class _New_accountState extends State<New_account> {
                               });
                             },
                             icon: !is_hide
-                                ? Icon(Icons.visibility)
-                                : Icon(Icons.visibility_off),
+                                ? Icon(Icons.visibility,color: Colors.white,)
+                                : Icon(Icons.visibility_off,color: Colors.white,),
                           ),
                         ),
                       ),
                     ),
                     SizedBox(height: 20.h),
-                    Container(
-                      padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                      decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(color: Colors.grey.shade200)),
-                      ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10,right: 10),
                       child: TextField(
+                        style: TextStyle(
+                          color: Colors.white
+                        ),
                         obscureText: is_hide2,
                         controller: confirm_pass_con,
                         decoration: InputDecoration(
@@ -209,19 +204,19 @@ class _New_accountState extends State<New_account> {
                           labelText: 'Confirm Password',
                           labelStyle: GoogleFonts.poppins(
                             fontSize: 15.sp,
-                            color: Colors.grey,
+                            color: Colors.white,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
                               borderSide:
-                                  BorderSide(color: Colors.black, width: 2.w)),
+                                  BorderSide(color: Colors.white, width: 1.w)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
                               borderSide: BorderSide(
-                                color: Colors.deepPurpleAccent,
-                                width: 2.w,
+                                color: Colors.black,
+                                width: 1.w,
                               )),
-                          prefixIcon: Icon(Icons.key),
+                          prefixIcon: Icon(Icons.key,color: Colors.white,),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -229,8 +224,8 @@ class _New_accountState extends State<New_account> {
                               });
                             },
                             icon: !is_hide2
-                                ? Icon(Icons.visibility)
-                                : Icon(Icons.visibility_off),
+                                ? Icon(Icons.visibility,color: Colors.white,)
+                                : Icon(Icons.visibility_off,color: Colors.white,),
                           ),
                         ),
                       ),
@@ -266,25 +261,6 @@ class _New_accountState extends State<New_account> {
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      color: Colors.black,
-                      thickness: 0.5.w,
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    GestureDetector(
-                        child: Text(
-                          "Login",
-                          style: TextStyle(color: Colors.blue, fontSize: 15),
-                        ),
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => login_page()))),
-                    SizedBox(height: 20.h),
                   ],
                 ),
               ),
@@ -315,12 +291,12 @@ class resusable_TextField extends StatefulWidget {
 class _resusable_TextFieldState extends State<resusable_TextField> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 20.w, right: 20.w),
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
-      ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10,right: 10),
       child: TextField(
+        style: TextStyle(
+          color: Colors.white,
+        ),
         controller: widget.name_con,
         decoration: InputDecoration(
           constraints: BoxConstraints(
@@ -329,16 +305,16 @@ class _resusable_TextFieldState extends State<resusable_TextField> {
           labelText: widget.input,
           labelStyle: GoogleFonts.poppins(
             fontSize: 15.sp,
-            color: Colors.grey,
+            color: Colors.white,
           ),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(color: Colors.black, width: 2.w)),
+              borderSide: BorderSide(color: Colors.white, width: 1.w)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide(
-                color: Colors.deepPurpleAccent,
-                width: 2.w,
+                color: Colors.black,
+                width: 1.w,
               )),
           prefixIcon: widget.icon,
         ),

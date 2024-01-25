@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../Computer Dept/Sem.dart';
-import '../Screens/floating_bar.dart';
 
 class Semester_5 extends StatefulWidget {
   const Semester_5({super.key});

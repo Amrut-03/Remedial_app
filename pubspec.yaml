@@ -51,6 +51,7 @@ dependencies:
   page_transition: ^2.1.0
   image_picker: ^1.0.7
   firebase_storage: ^11.6.0
+  lottie: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,7 @@ flutter:
     - images/Backgrounds/
     - images/icons/
     - images/RiveAssets/
+    - images/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

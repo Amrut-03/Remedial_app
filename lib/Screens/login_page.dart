@@ -61,7 +61,7 @@ class _login_pageState extends State<login_page> {
                 height: 500.h,
                 width: 450.w,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.deepPurpleAccent,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40.r),
                     topRight: Radius.circular(40.r),
@@ -72,82 +72,74 @@ class _login_pageState extends State<login_page> {
                       top: 50.h, left: 20.w, right: 20.w, bottom: 20.h),
                   child: Column(
                     children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                        decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: Colors.grey.shade200)),
+                      TextField(
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
-                        child: TextField(
-                          controller: email_controller,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints(
-                              maxHeight: 60.h,
-                            ),
-                            labelText: 'Enter Email',
-                            labelStyle: GoogleFonts.poppins(
-                              fontSize: 15.sp,
-                              color: Colors.grey,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 2.w)),
-                            focusedBorder: OutlineInputBorder(
+                        controller: email_controller,
+                        decoration: InputDecoration(
+                          constraints: BoxConstraints(
+                            maxHeight: 60.h,
+                          ),
+                          labelText: 'Enter Email',
+                          labelStyle: GoogleFonts.poppins(
+                            fontSize: 15.sp,
+                            color: Colors.white,
+                          ),
+                          enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
                               borderSide: BorderSide(
-                                color: Colors.deepPurpleAccent,
-                                width: 2.w,
-                              ),
+                                  color: Colors.white, width: 1.w)),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 1.w,
                             ),
-                            prefixIcon: Icon(Icons.email),
                           ),
+                          prefixIcon: Icon(Icons.email,color: Colors.white,),
                         ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                        decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: Colors.grey.shade200)),
+                      TextFormField(
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
-                        child: TextFormField(
-                          obscureText: is_hide,
-                          controller: pass_controller,
-                          decoration: InputDecoration(
-                              constraints: BoxConstraints(
-                                maxHeight: 60.h,
-                              ),
-                              labelText: 'Enter Password',
-                              labelStyle: GoogleFonts.poppins(
-                                fontSize: 15.sp,
-                                color: Colors.grey,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.black, width: 2.w)),
-                              focusedBorder: OutlineInputBorder(
+                        obscureText: is_hide,
+                        controller: pass_controller,
+                        decoration: InputDecoration(
+                            constraints: BoxConstraints(
+                              maxHeight: 60.h,
+                            ),
+                            labelText: 'Enter Password',
+                            labelStyle: GoogleFonts.poppins(
+                              fontSize: 15.sp,
+                              color: Colors.white,
+                            ),
+                            enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                                 borderSide: BorderSide(
-                                  color: Colors.deepPurpleAccent,
-                                  width: 2.w,
-                                ),
+                                    color: Colors.white, width: 1.w)),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1.w,
                               ),
-                              prefixIcon: Icon(Icons.key),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    is_hide = !is_hide;
-                                  });
-                                },
-                                icon: !is_hide
-                                    ? Icon(Icons.visibility)
-                                    : Icon(Icons.visibility_off),
-                              )),
-                        ),
+                            ),
+                            prefixIcon: Icon(Icons.key,color: Colors.white,),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  is_hide = !is_hide;
+                                });
+                              },
+                              icon: !is_hide
+                                  ? Icon(Icons.visibility,color: Colors.white,)
+                                  : Icon(Icons.visibility_off,color: Colors.white,),
+                            )),
                       ),
                       SizedBox(
                         height: 20.h,
@@ -155,7 +147,7 @@ class _login_pageState extends State<login_page> {
                       GestureDetector(
                         child: Text(
                           "Forgot Password ?",
-                          style: TextStyle(color: Colors.blue),
+                          style: TextStyle(color: Colors.white),
                         ),
                         onTap: () {
                           Navigator.push(
@@ -171,7 +163,7 @@ class _login_pageState extends State<login_page> {
                       GestureDetector(
                         child: Text(
                           "Create New Account",
-                          style: TextStyle(color: Colors.blue),
+                          style: TextStyle(color: Colors.white),
                         ),
                         onTap: () {
                           Navigator.push(
@@ -202,78 +194,6 @@ class _login_pageState extends State<login_page> {
                           ),
                         ),
                       ),
-                      // Divider(
-                      //   color: Colors.black,
-                      // ),
-                      // Container(
-                      //   child: Center(
-                      //     child: Text(
-                      //       "OR",
-                      //       style: TextStyle(color: Colors.grey),
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 30.h,
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     SizedBox(
-                      //       width: 20.w,
-                      //     ),
-                      //     GestureDetector(
-                      //       onTap: () {},
-                      //       child: Container(
-                      //         height: 60.h,
-                      //         width: 150.w,
-                      //         decoration: BoxDecoration(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(20.r)),
-                      //             color: Colors.black,
-                      //             border: Border.all(color: Colors.white),
-                      //             boxShadow: [
-                      //               BoxShadow(
-                      //                 color: Colors.deepPurpleAccent,
-                      //                 spreadRadius: 2.r,
-                      //                 blurRadius: 6.r,
-                      //               )
-                      //             ]),
-                      //         child: Padding(
-                      //             padding: EdgeInsets.all(8.h),
-                      //             child: Image.asset(
-                      //               "images/icons/Google.png",
-                      //             )),
-                      //       ),
-                      //     ),
-                      //     SizedBox(
-                      //       width: 30.w,
-                      //     ),
-                      //     GestureDetector(
-                      //       onTap: () {},
-                      //       child: Container(
-                      //         height: 60.h,
-                      //         width: 150.w,
-                      //         decoration: BoxDecoration(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(20.r)),
-                      //             color: Colors.black,
-                      //             border: Border.all(color: Colors.white),
-                      //             boxShadow: [
-                      //               BoxShadow(
-                      //                 color: Colors.deepPurpleAccent,
-                      //                 spreadRadius: 2.r,
-                      //                 blurRadius: 6.r,
-                      //               )
-                      //             ]),
-                      //         child: Padding(
-                      //             padding: EdgeInsets.all(8.h),
-                      //             child: Image.asset(
-                      //               "images/icons/LinkedIn.png",
-                      //             )),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // )
                     ],
                   ),
                 ),

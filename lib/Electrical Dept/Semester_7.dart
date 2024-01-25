@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../Computer Dept/Sem.dart';
-
 class Semester_7 extends StatefulWidget {
   const Semester_7({super.key});
 
