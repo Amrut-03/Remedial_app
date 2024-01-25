@@ -22,8 +22,9 @@ class Home_Screen extends StatefulWidget {
   State<Home_Screen> createState() => _Home_ScreenState();
 }
 
+var data;
+
 class _Home_ScreenState extends State<Home_Screen> {
-  var data;
   bool isLoding = true;
   bool is_image = true;
 
@@ -40,10 +41,11 @@ class _Home_ScreenState extends State<Home_Screen> {
   }
 
   user_image() {
-    if (data['gender'] == "male" || data['gender'] == "Male"){
-    setState(() {
-      is_image = false;
-    });}
+    if (data['gender'] == "Male") {
+      setState(() {
+        is_image = false;
+      });
+    }
   }
 
   CarouselController carouselController = CarouselController();
@@ -66,117 +68,131 @@ class _Home_ScreenState extends State<Home_Screen> {
           color: Colors.black,
           onTap: (index) async {
             if (index == 0) {
-              await Future.delayed(Duration(milliseconds: 900));
-              Navigator.pushReplacement(context, PageTransition(child: Home_Screen(), type:PageTransitionType.leftToRight,
-                  duration: Duration(milliseconds: 300)));
+              await Future.delayed(Duration(milliseconds: 200));
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: Home_Screen(),
+                      type: PageTransitionType.leftToRight,
+                      duration: const Duration(milliseconds: 200)));
             } else if (index == 1) {
-              await Future.delayed(Duration(milliseconds: 900));
-              Navigator.pushReplacement(context, PageTransition(child: profilePage(), type:PageTransitionType.bottomToTop,
-                  duration: Duration(milliseconds: 600)));
-            }
-            else if (index == 2) {
-              await Future.delayed(Duration(milliseconds: 900));
-              Navigator.pushReplacement(context, PageTransition(child: setting(), type:PageTransitionType.rightToLeft,
-                  duration: Duration(milliseconds: 600)));
+              await Future.delayed(Duration(milliseconds: 200));
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: profilePage(),
+                      type: PageTransitionType.bottomToTop,
+                      duration: Duration(milliseconds: 200)));
+            } else if (index == 2) {
+              await Future.delayed(Duration(milliseconds: 200));
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: setting(),
+                      type: PageTransitionType.rightToLeft,
+                      duration: Duration(milliseconds: 200)));
             }
           },
           items: [
             Icon(Icons.arrow_back, color: Colors.white),
-            Icon(Icons.person,color: Colors.white),
+            Icon(Icons.person, color: Colors.white),
             Icon(Icons.settings, color: Colors.white),
           ]),
       body: Stack(children: [
         Column(children: [
           if (isLoding)
             Shimmer.fromColors(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 30.h, bottom: 20.h, left: 20.w, right: 10.w),
-                  child: Column(
-                    children: [
-                      shimmer_padding(
-                          right: 10.w,
-                          left: 10.w,
-                          top: 10.h,
-                          bottom: 0.h,
-                          height: 130.h,
-                          width: 350.w),
-                      SizedBox(height: 10,),
-                      shimmer_padding(
-                          right: 10.w,
-                          left: 20.w,
-                          top: 0.h,
-                          bottom: 0.h,
-                          height: 50.h,
-                          width: 370.w),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          shimmer_padding(
-                              right: 10.w,
-                              left: 10.w,
-                              top: 10.h,
-                              bottom: 10.w,
-                              height: 170.h,
-                              width: 350.w),
-                        ],
-                      ),
-                      shimmer_padding(
-                          right: 20.w,
-                          left: 20.w,
-                          top: 0.h,
-                          bottom: 0.h,
-                          height: 50.h,
-                          width: 370.w),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          shimmer_padding(
-                              right: 20.w,
-                              left: 30.w,
-                              top: 0.h,
-                              bottom: 0.h,
-                              height: 70.h,
-                              width: 150.w),
-                          shimmer_padding(
-                              right: 20.w,
-                              left: 30.w,
-                              top: 0.h,
-                              bottom: 0.h,
-                              height: 70.h,
-                              width: 150.w),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          shimmer_padding(
-                              right: 20.w,
-                              left: 30.w,
-                              top: 0.h,
-                              bottom: 0.h,
-                              height: 70.h,
-                              width: 150.w),
-                          shimmer_padding(
-                              right: 20.w,
-                              left: 30.w,
-                              top: 0.h,
-                              bottom: 0.h,
-                              height: 70.h,
-                              width: 150.w),
-                        ],
-                      ),
-                    ],
-                  ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: 30.h, bottom: 20.h, left: 20.w, right: 10.w),
+                child: Column(
+                  children: [
+                    shimmer_padding(
+                        right: 10.w,
+                        left: 10.w,
+                        top: 10.h,
+                        bottom: 0.h,
+                        height: 130.h,
+                        width: 350.w),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    shimmer_padding(
+                        right: 10.w,
+                        left: 20.w,
+                        top: 0.h,
+                        bottom: 0.h,
+                        height: 50.h,
+                        width: 370.w),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        shimmer_padding(
+                            right: 10.w,
+                            left: 10.w,
+                            top: 10.h,
+                            bottom: 10.w,
+                            height: 170.h,
+                            width: 350.w),
+                      ],
+                    ),
+                    shimmer_padding(
+                        right: 20.w,
+                        left: 20.w,
+                        top: 0.h,
+                        bottom: 0.h,
+                        height: 50.h,
+                        width: 370.w),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        shimmer_padding(
+                            right: 20.w,
+                            left: 30.w,
+                            top: 0.h,
+                            bottom: 0.h,
+                            height: 70.h,
+                            width: 150.w),
+                        shimmer_padding(
+                            right: 20.w,
+                            left: 30.w,
+                            top: 0.h,
+                            bottom: 0.h,
+                            height: 70.h,
+                            width: 150.w),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        shimmer_padding(
+                            right: 20.w,
+                            left: 30.w,
+                            top: 0.h,
+                            bottom: 0.h,
+                            height: 70.h,
+                            width: 150.w),
+                        shimmer_padding(
+                            right: 20.w,
+                            left: 30.w,
+                            top: 0.h,
+                            bottom: 0.h,
+                            height: 70.h,
+                            width: 150.w),
+                      ],
+                    ),
+                  ],
                 ),
+              ),
               highlightColor: Colors.grey.shade100,
-              baseColor: Colors.grey.shade500,)
+              baseColor: Colors.grey.shade500,
+            )
           else
             Visibility(
               visible: !isLoding,
@@ -352,7 +368,8 @@ class _Home_ScreenState extends State<Home_Screen> {
                                 onclick: () {
                                   Navigator.push(
                                       context,
-                                      PageTransition(child: Computer(),
+                                      PageTransition(
+                                        child: Computer(),
                                         type: PageTransitionType.bottomToTop,
                                         duration: Duration(milliseconds: 400),
                                       ));

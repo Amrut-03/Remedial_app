@@ -1,8 +1,10 @@
+import 'package:Remedial_App/Screens/Home_screen.dart';
 import 'package:Remedial_App/Screens/Onboarding.dart';
 import 'package:Remedial_App/Screens/profile.dart';
 import 'package:Remedial_App/Setting_Screen/about.dart';
 import 'package:Remedial_App/Setting_Screen/feedback.dart';
 import 'package:Remedial_App/Setting_Screen/privacy_security.dart';
+import 'package:Remedial_App/Setting_Screen/show_feedback.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,10 +18,10 @@ class setting extends StatefulWidget {
 }
 
 class _settingState extends State<setting> {
-
-  logout()async{
+  logout() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>Onboarding()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Onboarding()));
   }
 
   @override
@@ -29,60 +31,128 @@ class _settingState extends State<setting> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text("Settings",textAlign: TextAlign.center,style: GoogleFonts.poppins(
-          fontWeight: FontWeight.w600,
-          fontSize: 25,
-          color: Colors.white
-        ),),
+        title: Text(
+          "Settings",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600, fontSize: 25, color: Colors.white),
+        ),
         backgroundColor: Colors.black,
       ),
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 20,),
-            Reusable_list(lead_icon: Icon(Icons.person,color: Colors.white,),
-                tra_icon: Icon(Icons.arrow_forward,color: Colors.white),
-                text: 'Account', onClick: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>profilePage()));}),
+            SizedBox(
+              height: 20,
+            ),
+            Reusable_list(
+                lead_icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                tra_icon: Icon(Icons.arrow_forward, color: Colors.white),
+                text: 'Account',
+                onClick: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => profilePage()));
+                }),
             Divider(
               color: Colors.white,
               indent: 10,
               endIndent: 10,
             ),
-            Reusable_list(lead_icon: Icon(Icons.lock,color: Colors.white),
-                tra_icon: Icon(Icons.arrow_forward,color: Colors.white),
-                text: 'Privacy and Security', onClick: (){Navigator.push(context, PageTransition(child: privacy_security(), type: PageTransitionType.topToBottom,duration: Duration(milliseconds: 500)));}),
+            Reusable_list(
+                lead_icon: Icon(Icons.lock, color: Colors.white),
+                tra_icon: Icon(Icons.arrow_forward, color: Colors.white),
+                text: 'Privacy and Security',
+                onClick: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: privacy_security(),
+                          type: PageTransitionType.topToBottom,
+                          duration: Duration(milliseconds: 500)));
+                }),
             Divider(
               color: Colors.white,
               indent: 10,
               endIndent: 10,
             ),
-            Reusable_list(lead_icon: Icon(Icons.notifications,color: Colors.white),
-                tra_icon: Icon(Icons.arrow_forward,color: Colors.white),
-                text: 'Feedback', onClick: (){Navigator.push(context, PageTransition(child: feedback(), type: PageTransitionType.topToBottom,duration: Duration(milliseconds: 500)));}),
+            Reusable_list(
+                lead_icon: Icon(Icons.notifications, color: Colors.white),
+                tra_icon: Icon(Icons.arrow_forward, color: Colors.white),
+                text: 'Feedback',
+                onClick: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: feedback(),
+                          type: PageTransitionType.rightToLeftWithFade,
+                          duration: Duration(milliseconds: 500)));
+                }),
             Divider(
               color: Colors.white,
               indent: 10,
               endIndent: 10,
             ),
-            Reusable_list(lead_icon: Icon(Icons.headphones,color: Colors.white),
-                tra_icon: Icon(Icons.arrow_forward,color: Colors.white),
-                text: 'Help and Support', onClick: (){Navigator.pop(context);}),
+            Reusable_list(
+                lead_icon: Icon(Icons.headphones, color: Colors.white),
+                tra_icon: Icon(Icons.arrow_forward, color: Colors.white),
+                text: 'Help and Support',
+                onClick: () {
+                  Navigator.pop(context);
+                }),
             Divider(
               color: Colors.white,
               indent: 10,
               endIndent: 10,
             ),
-            Reusable_list(lead_icon: Icon(Icons.question_mark,color: Colors.white),
-                tra_icon: Icon(Icons.arrow_forward,color: Colors.white),
-                text: 'About', onClick: (){Navigator.push(context, PageTransition(child: about(), type: PageTransitionType.topToBottom,duration: Duration(milliseconds: 500)));}),
+            Reusable_list(
+                lead_icon: Icon(Icons.question_mark, color: Colors.white),
+                tra_icon: Icon(Icons.arrow_forward, color: Colors.white),
+                text: 'About',
+                onClick: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: about(),
+                          type: PageTransitionType.topToBottom,
+                          duration: Duration(milliseconds: 500)));
+                }),
             Divider(
               color: Colors.white,
               indent: 10,
               endIndent: 10,
             ),
-            Reusable_list(lead_icon: Icon(Icons.logout,color: Colors.white),
-                tra_icon: Icon(Icons.arrow_forward,color: Colors.white),
-                text: 'Logout', onClick: ()=>logout()),
+            Visibility(
+              visible: data['role'] == 'admin',
+              child: Column(
+                children: [
+                  Reusable_list(
+                      lead_icon: Icon(Icons.lock, color: Colors.white),
+                      tra_icon: Icon(Icons.arrow_forward, color: Colors.white),
+                      text: 'show feedback',
+                      onClick: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                child: showFeedback(),
+                                type: PageTransitionType.topToBottom,
+                                duration: Duration(milliseconds: 500)));
+                      }),
+                  Divider(
+                    color: Colors.white,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                ],
+              ),
+            ),
+            Reusable_list(
+                lead_icon: Icon(Icons.logout, color: Colors.white),
+                tra_icon: Icon(Icons.arrow_forward, color: Colors.white),
+                text: 'Logout',
+                onClick: () => logout()),
             Divider(
               color: Colors.white,
               indent: 10,
@@ -101,10 +171,12 @@ class Reusable_list extends StatelessWidget {
   final String text;
   final VoidCallback onClick;
 
-  Reusable_list({
-    super.key,
-     required this.lead_icon, required this.tra_icon, required this.text, required this.onClick
-  });
+  Reusable_list(
+      {super.key,
+      required this.lead_icon,
+      required this.tra_icon,
+      required this.text,
+      required this.onClick});
 
   @override
   Widget build(BuildContext context) {

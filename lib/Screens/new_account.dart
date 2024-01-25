@@ -20,18 +20,18 @@ class _New_accountState extends State<New_account> {
   TextEditingController department_con = TextEditingController();
   TextEditingController pass_con = TextEditingController();
   TextEditingController confirm_pass_con = TextEditingController();
-  TextEditingController gender_con = TextEditingController();
   bool is_hide = true;
   bool is_hide2 = true;
+  String gender = 'Other';
 
-  add_user(
-      {required String name,
-      required String email,
-      required String phone,
-      required String password,
-      required String confirm_pass,
-      required String department,
-      required String gender}) async {
+  add_user({
+    required String name,
+    required String email,
+    required String phone,
+    required String password,
+    required String confirm_pass,
+    required String department,
+  }) async {
     if (password != confirm_pass) {
       showDialog(
           context: context,
@@ -72,11 +72,15 @@ class _New_accountState extends State<New_account> {
         "gender": gender,
         "department": department,
         "password": password,
+        'role': 'student',
       });
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Home_Screen()));
-    } catch (e) {
-      print("succeful");
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.message!),
+      ));
+      print(e);
     }
   }
 
@@ -84,9 +88,7 @@ class _New_accountState extends State<New_account> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white
-        ),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
@@ -119,40 +121,81 @@ class _New_accountState extends State<New_account> {
                     SizedBox(height: 30.h),
                     resusable_TextField(
                       name_con: name_con,
-                      icon: Icon(Icons.person,color: Colors.white,),
+                      icon: const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
                       input: 'Enter Full Name',
                     ),
                     SizedBox(height: 20.h),
                     resusable_TextField(
                       name_con: email_con,
-                      icon: Icon(Icons.email,color: Colors.white,),
+                      icon: const Icon(
+                        Icons.email,
+                        color: Colors.white,
+                      ),
                       input: 'Enter email',
                     ),
                     SizedBox(height: 20.h),
                     resusable_TextField(
                       name_con: phone_con,
-                      icon: Icon(Icons.phone,color: Colors.white,),
+                      icon: const Icon(
+                        Icons.phone,
+                        color: Colors.white,
+                      ),
                       input: 'Phone Number',
                     ),
                     SizedBox(height: 20.h),
                     resusable_TextField(
                       name_con: department_con,
-                      icon: Icon(Icons.holiday_village,color: Colors.white,),
+                      icon: const Icon(
+                        Icons.holiday_village,
+                        color: Colors.white,
+                      ),
                       input: 'Department Name',
                     ),
                     SizedBox(height: 20.h),
-                    resusable_TextField(
-                      name_con: gender_con,
-                      icon: Icon(Icons.male,color: Colors.white,),
-                      input: 'Gender',
-                    ),
+                    DropdownButton(
+                        iconSize: 50,
+                        enableFeedback: true,
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.black,
+                        ),
+                        items: const [
+                          DropdownMenuItem(
+                            child: Text(
+                              "Male",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            value: 'Male',
+                          ),
+                          DropdownMenuItem(
+                            child: Text(
+                              "Female",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            value: 'Female',
+                          ),
+                          DropdownMenuItem(
+                            child: Text(
+                              "Other",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            value: 'Other',
+                          ),
+                        ],
+                        value: gender,
+                        onChanged: ((String? value) {
+                          setState(() {
+                            gender = value!;
+                          });
+                        })),
                     SizedBox(height: 20.h),
                     Padding(
-                      padding: EdgeInsets.only(left: 10,right: 10),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       child: TextField(
-                        style: TextStyle(
-                            color: Colors.white
-                        ),
+                        style: TextStyle(color: Colors.white),
                         obscureText: is_hide,
                         controller: pass_con,
                         decoration: InputDecoration(
@@ -174,7 +217,10 @@ class _New_accountState extends State<New_account> {
                                 color: Colors.black,
                                 width: 1.w,
                               )),
-                          prefixIcon: Icon(Icons.key,color: Colors.white,),
+                          prefixIcon: Icon(
+                            Icons.key,
+                            color: Colors.white,
+                          ),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -182,19 +228,23 @@ class _New_accountState extends State<New_account> {
                               });
                             },
                             icon: !is_hide
-                                ? Icon(Icons.visibility,color: Colors.white,)
-                                : Icon(Icons.visibility_off,color: Colors.white,),
+                                ? Icon(
+                                    Icons.visibility,
+                                    color: Colors.white,
+                                  )
+                                : Icon(
+                                    Icons.visibility_off,
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
                       ),
                     ),
                     SizedBox(height: 20.h),
                     Padding(
-                      padding: EdgeInsets.only(left: 10,right: 10),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       child: TextField(
-                        style: TextStyle(
-                          color: Colors.white
-                        ),
+                        style: TextStyle(color: Colors.white),
                         obscureText: is_hide2,
                         controller: confirm_pass_con,
                         decoration: InputDecoration(
@@ -216,7 +266,10 @@ class _New_accountState extends State<New_account> {
                                 color: Colors.black,
                                 width: 1.w,
                               )),
-                          prefixIcon: Icon(Icons.key,color: Colors.white,),
+                          prefixIcon: Icon(
+                            Icons.key,
+                            color: Colors.white,
+                          ),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -224,8 +277,14 @@ class _New_accountState extends State<New_account> {
                               });
                             },
                             icon: !is_hide2
-                                ? Icon(Icons.visibility,color: Colors.white,)
-                                : Icon(Icons.visibility_off,color: Colors.white,),
+                                ? Icon(
+                                    Icons.visibility,
+                                    color: Colors.white,
+                                  )
+                                : Icon(
+                                    Icons.visibility_off,
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
                       ),
@@ -234,14 +293,13 @@ class _New_accountState extends State<New_account> {
                     ElevatedButton(
                       onPressed: () {
                         add_user(
-                            name: name_con.text,
-                            email: email_con.text,
-                            phone: phone_con.text,
-                            password: pass_con.text,
-                            confirm_pass: confirm_pass_con.text,
-                            department: department_con.text,
-                            gender: gender_con.text);
-                        Navigator.pop;
+                          name: name_con.text,
+                          email: email_con.text,
+                          phone: phone_con.text,
+                          password: pass_con.text,
+                          confirm_pass: confirm_pass_con.text,
+                          department: department_con.text,
+                        );
                       },
                       child: Text(
                         "Submit",
@@ -292,7 +350,7 @@ class _resusable_TextFieldState extends State<resusable_TextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10,right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       child: TextField(
         style: TextStyle(
           color: Colors.white,
