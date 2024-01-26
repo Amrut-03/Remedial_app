@@ -18,22 +18,25 @@ class _Forgot_screenState extends State<Forgot_screen> {
   forgot_pass({required String emailId}) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: emailId);
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text("passwaord reset link sent check your email"),
-              actions: [
-                ElevatedButton(
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => login_page())),
-                    child: Text("ok"))
-              ],
-            );
-          });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.white,
+          content: Text(
+            'Email sent Successfully',
+            style: GoogleFonts.poppins(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+          )));
     } on FirebaseException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message!)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.white,
+          content: Text(
+            e.message!,
+            style: GoogleFonts.poppins(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+          )));
     }
   }
 
@@ -120,7 +123,10 @@ class _Forgot_screenState extends State<Forgot_screen> {
                                   width: 1.w,
                                 ),
                               ),
-                              prefixIcon: Icon(Icons.email,color: Colors.white,),
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           SizedBox(height: 40.h),

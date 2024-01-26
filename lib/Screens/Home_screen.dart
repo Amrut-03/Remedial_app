@@ -1,19 +1,12 @@
-import 'package:Remedial_App/Branches/Civil.dart';
 import 'package:Remedial_App/Branches/Computer.dart';
-import 'package:Remedial_App/Branches/Electrical.dart';
-import 'package:Remedial_App/Branches/Mechanical.dart';
-import 'package:Remedial_App/Screens/profile.dart';
-import 'package:Remedial_App/Setting_Screen/setting_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:carousel_slider/carousel_controller.dart';
 
 class Home_Screen extends StatefulWidget {
   Home_Screen({super.key});
@@ -63,41 +56,6 @@ class _Home_ScreenState extends State<Home_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurpleAccent,
-      bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Colors.deepPurpleAccent,
-          color: Colors.black,
-          onTap: (index) async {
-            if (index == 0) {
-              await Future.delayed(Duration(milliseconds: 200));
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      child: Home_Screen(),
-                      type: PageTransitionType.leftToRight,
-                      duration: const Duration(milliseconds: 200)));
-            } else if (index == 1) {
-              await Future.delayed(Duration(milliseconds: 200));
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      child: profilePage(),
-                      type: PageTransitionType.bottomToTop,
-                      duration: Duration(milliseconds: 200)));
-            } else if (index == 2) {
-              await Future.delayed(Duration(milliseconds: 200));
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      child: setting(),
-                      type: PageTransitionType.rightToLeft,
-                      duration: Duration(milliseconds: 200)));
-            }
-          },
-          items: [
-            Icon(Icons.arrow_back, color: Colors.white),
-            Icon(Icons.person, color: Colors.white),
-            Icon(Icons.settings, color: Colors.white),
-          ]),
       body: Stack(children: [
         Column(children: [
           if (isLoding)
@@ -313,7 +271,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                       ),
                       child: CarouselSlider(
                         items: [
-                          Text("Physics Test is Currently Available"),
+                          // Text("Physics Test is Currently Available"),
                           Image.asset("images/icons/quize.png",
                               fit: BoxFit.cover),
                           Image.asset("images/icons/quize1.png",
@@ -382,10 +340,10 @@ class _Home_ScreenState extends State<Home_Screen> {
                                 height: 70.h,
                                 width: 150.w,
                                 onclick: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Mechanical()));
+                                  //   Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => Mechanical()));
                                 },
                               ),
                             ],
@@ -402,10 +360,10 @@ class _Home_ScreenState extends State<Home_Screen> {
                                 height: 70.h,
                                 width: 150.w,
                                 onclick: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Civil()));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => Civil()));
                                 },
                               ),
                               SizedBox(width: 10.w),
@@ -414,10 +372,10 @@ class _Home_ScreenState extends State<Home_Screen> {
                                 height: 70.h,
                                 width: 150.w,
                                 onclick: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Electrical()));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => Electrical()));
                                 },
                                 fonsize: 12.sp,
                               ),

@@ -1,6 +1,8 @@
 import 'package:Remedial_App/Screens/Forgot_screen.dart';
+import 'package:Remedial_App/Screens/bottomNavigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Remedial_App/Screens/new_account.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,11 +24,28 @@ class _login_pageState extends State<login_page> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email_controller.text, password: pass_controller.text);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Home_Screen()));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.white,
+          content: Text(
+            'You have Successfully Logged-in in your Account.',
+            style: GoogleFonts.poppins(
+                color: Colors.black, fontWeight: FontWeight.w600),
+          )));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => BottomNavBar()));
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message!)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.white,
+          content: Text(
+            e.message!,
+            style: GoogleFonts.poppins(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      );
     }
   }
 
@@ -88,8 +107,8 @@ class _login_pageState extends State<login_page> {
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
-                              borderSide: BorderSide(
-                                  color: Colors.white, width: 1.w)),
+                              borderSide:
+                                  BorderSide(color: Colors.white, width: 1.w)),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.r),
                             borderSide: BorderSide(
@@ -97,7 +116,10 @@ class _login_pageState extends State<login_page> {
                               width: 1.w,
                             ),
                           ),
-                          prefixIcon: Icon(Icons.email,color: Colors.white,),
+                          prefixIcon: Icon(
+                            Icons.email,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -129,7 +151,10 @@ class _login_pageState extends State<login_page> {
                                 width: 1.w,
                               ),
                             ),
-                            prefixIcon: Icon(Icons.key,color: Colors.white,),
+                            prefixIcon: Icon(
+                              Icons.key,
+                              color: Colors.white,
+                            ),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -137,8 +162,14 @@ class _login_pageState extends State<login_page> {
                                 });
                               },
                               icon: !is_hide
-                                  ? Icon(Icons.visibility,color: Colors.white,)
-                                  : Icon(Icons.visibility_off,color: Colors.white,),
+                                  ? Icon(
+                                      Icons.visibility,
+                                      color: Colors.white,
+                                    )
+                                  : Icon(
+                                      Icons.visibility_off,
+                                      color: Colors.white,
+                                    ),
                             )),
                       ),
                       SizedBox(
@@ -166,7 +197,7 @@ class _login_pageState extends State<login_page> {
                           style: TextStyle(color: Colors.white),
                         ),
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => New_account()));

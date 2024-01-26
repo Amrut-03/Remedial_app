@@ -1,4 +1,4 @@
-import 'package:Remedial_App/Screens/Home_screen.dart';
+import 'package:Remedial_App/Screens/bottomNavigation_bar.dart';
 import 'package:Remedial_App/Screens/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +23,7 @@ class _New_accountState extends State<New_account> {
   bool is_hide = true;
   bool is_hide2 = true;
   String gender = 'Other';
+  bool is_tap = true;
 
   add_user({
     required String name,
@@ -33,18 +34,15 @@ class _New_accountState extends State<New_account> {
     required String department,
   }) async {
     if (password != confirm_pass) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                "Confirm Password is Different from Password🧐",
-                style: GoogleFonts.poppins(
-                  fontSize: 20,
-                ),
-              ),
-            );
-          });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.white,
+          content: Text(
+            "Confirm Password is Different from Password.",
+            style: GoogleFonts.poppins(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+          )));
       return;
     }
     if (name == '' ||
@@ -55,7 +53,14 @@ class _New_accountState extends State<New_account> {
         gender == '' ||
         confirm_pass == '') {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("All fields are Required🛑"),
+        backgroundColor: Colors.white,
+        content: Text(
+          "All fields are Required.",
+          style: GoogleFonts.poppins(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ));
       return;
     }
@@ -74,11 +79,18 @@ class _New_accountState extends State<New_account> {
         "password": password,
         'role': 'student',
       });
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Home_Screen()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => BottomNavBar()));
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(e.message!),
+        backgroundColor: Colors.white,
+        content: Text(
+          e.message!,
+          style: GoogleFonts.poppins(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ));
       print(e);
     }
@@ -155,42 +167,72 @@ class _New_accountState extends State<New_account> {
                       input: 'Department Name',
                     ),
                     SizedBox(height: 20.h),
-                    DropdownButton(
-                        iconSize: 50,
-                        enableFeedback: true,
-                        icon: Icon(
-                          Icons.menu,
-                          color: Colors.black,
+                    Container(
+                      height: 60,
+                      width: 390,
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 1,
+                          )),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.male,
+                          color: Colors.white,
                         ),
-                        items: const [
-                          DropdownMenuItem(
-                            child: Text(
-                              "Male",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            value: 'Male',
+                        title: Text(
+                          "Gender",
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
                           ),
-                          DropdownMenuItem(
-                            child: Text(
-                              "Female",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            value: 'Female',
-                          ),
-                          DropdownMenuItem(
-                            child: Text(
-                              "Other",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            value: 'Other',
-                          ),
-                        ],
-                        value: gender,
-                        onChanged: ((String? value) {
-                          setState(() {
-                            gender = value!;
-                          });
-                        })),
+                        ),
+                        trailing: DropdownButton(
+                            dropdownColor: Colors.black,
+                            iconSize: 30,
+                            enableFeedback: true,
+                            icon: is_tap
+                                ? Icon(
+                                    Icons.radio_button_off,
+                                    color: Colors.white,
+                                  )
+                                : Icon(
+                                    Icons.radio_button_checked,
+                                    color: Colors.white,
+                                  ),
+                            items: const [
+                              DropdownMenuItem(
+                                child: Text(
+                                  "Male",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                value: 'Male',
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  "Female",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                value: 'Female',
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  "Other",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                value: 'Other',
+                              ),
+                            ],
+                            value: gender,
+                            onChanged: ((String? value) {
+                              setState(() {
+                                gender = value!;
+                                is_tap = false;
+                              });
+                            })),
+                      ),
+                    ),
                     SizedBox(height: 20.h),
                     Padding(
                       padding: EdgeInsets.only(left: 10, right: 10),
@@ -319,6 +361,22 @@ class _New_accountState extends State<New_account> {
                       ),
                     ),
                     SizedBox(height: 10.h),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => login_page()));
+                      },
+                      child: Text(
+                        'Login',
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

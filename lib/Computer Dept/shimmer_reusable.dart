@@ -12,18 +12,18 @@ class shimmer_resuable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding:EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
-        child: Shimmer.fromColors(
-            child: Container(
-              height: 50,
-              width: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-              ),
-            ),
-          highlightColor: Colors.grey.shade100,
-          baseColor: Colors.grey.shade500,),
-      );
+      padding: EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+      child: Shimmer.fromColors(
+        child: Container(
+          height: 50,
+          width: 300,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        highlightColor: Colors.grey.shade100,
+        baseColor: Colors.grey.shade500,
+      ),
+    );
   }
 }

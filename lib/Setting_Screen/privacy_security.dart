@@ -25,7 +25,13 @@ class _privacy_securityState extends State<privacy_security> {
   }
 
   Reset_pass({required String emailId}) async {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.black,content: Text('email sent Successfully on your Email')));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.white,
+        content: Text(
+          'email sent Successfully on your Email',
+          style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600, color: Colors.black),
+        )));
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: emailId);
     } catch (e) {
@@ -63,62 +69,82 @@ class _privacy_securityState extends State<privacy_security> {
       body: SafeArea(
         child: Stack(children: [
           if (!is_loading)
-            Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: Text(
-                    "Account Details",
-                    style: GoogleFonts.poppins(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
+            Center(
+              child: Container(
+                height: 400,
+                width: 370,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: Text(
+                        "Account Details",
+                        style: GoogleFonts.poppins(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      indent: 50,
+                      endIndent: 50,
                       color: Colors.white,
                     ),
-                  ),
-                ),
-                Divider(
-                  indent: 50,
-                  endIndent: 50,
-                  color: Colors.white,
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.email,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    user_data['email'],
-                    style: GoogleFonts.poppins(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.key,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Change Password',
-                    style: GoogleFonts.poppins(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                  trailing: IconButton(
-                      onPressed: () => Reset_pass(emailId: user_data['email']),
-                      icon: Icon(
-                        Icons.arrow_forward,
+                    ListTile(
+                      leading: Icon(
+                        Icons.email,
                         color: Colors.white,
-                      )),
-                )
-              ],
+                      ),
+                      title: Text(
+                        user_data['email'],
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.white,
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.key,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        'Change Password',
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                      trailing: IconButton(
+                          onPressed: () =>
+                              Reset_pass(emailId: user_data['email']),
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          )),
+                    ),
+                    Divider(
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
             )
           else
             Center(child: CircularProgressIndicator())

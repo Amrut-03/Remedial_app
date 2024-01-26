@@ -36,16 +36,15 @@ class _semester_1State extends State<semester_1> {
     return Scaffold(
       backgroundColor: Colors.deepPurpleAccent,
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(bottom: 20),
-                child: Stack(children: [
-                  Visibility(
-                    visible: !isLoading,
-                    child: Container(
+        child: Stack(children: [
+          if (!isLoading)
+            Visibility(
+              visible: !isLoading,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
                       height: 200,
                       width: 350,
                       child: ClipRRect(
@@ -70,115 +69,139 @@ class _semester_1State extends State<semester_1> {
                             ],
                           )),
                     ),
-                  ),
-                  if (isLoading)
-                    Shimmer.fromColors(
-                      highlightColor: Colors.grey.shade100,
-                      baseColor: Colors.grey.shade500,
+                    Padding(
+                      padding: EdgeInsets.all(20),
                       child: Container(
-                        height: 200,
+                        height: 60,
                         width: 350,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Colors
-                              .white, // Use a background color matching your design
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Colors.black,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.deepPurpleAccent,
+                                  spreadRadius: 2,
+                                  blurRadius: 6)
+                            ]),
+                        child: Center(
+                          child: Text(
+                            "Choose your Backlog Subject",
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
                         ),
                       ),
                     ),
-                ]),
+                    reusable_container(
+                        subject: 'Mechanics',
+                        Onclick: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => start_screen_mech()))),
+                    SizedBox(height: 10),
+                    reusable_container(
+                        subject: 'C Programming',
+                        Onclick: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => start_screen_cp()))),
+                    SizedBox(height: 10),
+                    reusable_container(
+                        subject: 'Chemistry',
+                        Onclick: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => start_screen_che()))),
+                    SizedBox(height: 10),
+                    reusable_container(
+                        subject: 'Mathematics 1',
+                        Onclick: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => start_screen_m1()))),
+                  ],
+                ),
               ),
-              Stack(children: [
-                Visibility(
-                  visible: !isLoading,
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Container(
-                      height: 60,
-                      width: 350,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.black,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.deepPurpleAccent,
-                                spreadRadius: 2,
-                                blurRadius: 6)
-                          ]),
-                      child: Center(
-                        child: Text(
-                          "Choose your Backlog Subject",
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontSize: 20),
+            )
+          else
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Shimmer.fromColors(
+                    highlightColor: Colors.grey.shade100,
+                    baseColor: Colors.grey.shade500,
+                    child: Column(
+                      children: [
+                        container(
+                          height: 200,
+                          width: 350,
+                          rad: 20,
                         ),
-                      ),
+                        SizedBox(height: 20),
+                        container(
+                          height: 60,
+                          width: 350,
+                          rad: 20,
+                        ),
+                        SizedBox(height: 30),
+                        container(
+                          height: 40,
+                          width: 300,
+                          rad: 20,
+                        ),
+                        SizedBox(height: 30),
+                        container(
+                          height: 40,
+                          width: 300,
+                          rad: 20,
+                        ),
+                        SizedBox(height: 30),
+                        container(
+                          height: 40,
+                          width: 300,
+                          rad: 20,
+                        ),
+                        SizedBox(height: 30),
+                        container(
+                          height: 40,
+                          width: 300,
+                          rad: 20,
+                        ),
+                        SizedBox(height: 30),
+                      ],
                     ),
                   ),
                 ),
-                if (isLoading)
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Shimmer.fromColors(
-                        child: Container(
-                          height: 60,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                        ),
-                      highlightColor: Colors.grey.shade100,
-                      baseColor: Colors.grey.shade500,),
-                  )
-              ]),
-              Stack(children: [
-                reusable_container(
-                    subject: 'Mechanics',
-                    Onclick: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => start_screen_mech()))),
-                if (isLoading)
-                  shimmer_resuable(isLoading: isLoading)
-              ]),
-              Stack(children: [
-                reusable_container(
-                    subject: 'C Programming',
-                    Onclick: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => start_screen_cp()))),
-                if (isLoading)
-                  shimmer_resuable(isLoading: isLoading),
-              ]),
-              Stack(children: [
-                reusable_container(
-                    subject: 'Chemistry',
-                    Onclick: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => start_screen_che()))),
-                if (isLoading)
-                  shimmer_resuable(isLoading: isLoading)
-              ]),
-              Stack(children: [
-                reusable_container(
-                    subject: 'Mathematics 1',
-                    Onclick: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => start_screen_m1()))),
-                if (isLoading)
-                  shimmer_resuable(isLoading: isLoading),
-              ]),
-            ],
-          ),
-        ),
+              ],
+            ),
+        ]),
       ),
     );
   }
 }
 
+class container extends StatelessWidget {
+  final double height;
+  final double width;
+  final double rad;
+  const container({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.rad,
+  });
 
-
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(rad)),
+          color: Colors.white),
+    );
+  }
+}

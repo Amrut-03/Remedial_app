@@ -1,6 +1,6 @@
+import 'package:Remedial_App/Screens/bottomNavigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'Home_screen.dart';
 import 'Onboarding.dart';
 
 class demo extends StatefulWidget {
@@ -17,7 +17,7 @@ class _demoState extends State<demo> {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Home_Screen();
+          return BottomNavBar();
         } else {
           return Onboarding();
         }
