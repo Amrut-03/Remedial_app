@@ -22,7 +22,9 @@ class _New_accountState extends State<New_account> {
   TextEditingController confirm_pass_con = TextEditingController();
   bool is_hide = true;
   bool is_hide2 = true;
-  String gender = 'Other';
+  String ling = 'Gender';
+  String branch = 'Department';
+  bool is_click = true;
   bool is_tap = true;
 
   add_user({
@@ -31,7 +33,6 @@ class _New_accountState extends State<New_account> {
     required String phone,
     required String password,
     required String confirm_pass,
-    required String department,
   }) async {
     if (password != confirm_pass) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -49,8 +50,8 @@ class _New_accountState extends State<New_account> {
         email == '' ||
         phone == '' ||
         password == '' ||
-        department == '' ||
-        gender == '' ||
+        branch == '' ||
+        ling == '' ||
         confirm_pass == '') {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.white,
@@ -74,8 +75,8 @@ class _New_accountState extends State<New_account> {
         "name": name,
         "email": email,
         "phone": phone,
-        "gender": gender,
-        "department": department,
+        "gender": ling,
+        "department": branch,
         "password": password,
         'role': 'student',
       });
@@ -99,10 +100,6 @@ class _New_accountState extends State<New_account> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Colors.black,
-      ),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -158,13 +155,89 @@ class _New_accountState extends State<New_account> {
                       input: 'Phone Number',
                     ),
                     SizedBox(height: 20.h),
-                    resusable_TextField(
-                      name_con: department_con,
-                      icon: const Icon(
-                        Icons.holiday_village,
-                        color: Colors.white,
+                    Container(
+                      height: 60,
+                      width: 390,
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 1,
+                          )),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.holiday_village,
+                          color: Colors.white,
+                        ),
+                        title: DropdownButton(
+                          dropdownColor: Colors.black,
+                          iconSize: 30,
+                          enableFeedback: true,
+                          iconEnabledColor: Colors.transparent,
+                          items: const [
+                            DropdownMenuItem(
+                              child: Text(
+                                "Department",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              value: 'Department',
+                            ),
+                            DropdownMenuItem(
+                              child: Text(
+                                "Electrical Engineering",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              value: 'Electrical Engineering',
+                            ),
+                            DropdownMenuItem(
+                              child: Text(
+                                "Civil Engineering",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              value: 'Civil Engineering',
+                            ),
+                            DropdownMenuItem(
+                              child: Text(
+                                "Mechanical Engineering",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              value: 'Mechanical Engineering',
+                            ),
+                            DropdownMenuItem(
+                              child: Text(
+                                "Computer Science Engineering",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              value: 'Computer Science Engineering',
+                            ),
+                            DropdownMenuItem(
+                              child: Text(
+                                "Electronics and Telecommunication",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              value: 'Electronics and Telecommunication',
+                            ),
+                          ],
+                          value: branch,
+                          onChanged: ((String? value) {
+                            setState(
+                              () {
+                                branch = value!;
+                                is_click = false;
+                              },
+                            );
+                          }),
+                        ),
                       ),
-                      input: 'Department Name',
                     ),
                     SizedBox(height: 20.h),
                     Container(
@@ -182,55 +255,47 @@ class _New_accountState extends State<New_account> {
                           Icons.male,
                           color: Colors.white,
                         ),
-                        title: Text(
-                          "Gender",
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                          ),
-                        ),
-                        trailing: DropdownButton(
-                            dropdownColor: Colors.black,
-                            iconSize: 30,
-                            enableFeedback: true,
-                            icon: is_tap
-                                ? Icon(
-                                    Icons.radio_button_off,
-                                    color: Colors.white,
-                                  )
-                                : Icon(
-                                    Icons.radio_button_checked,
-                                    color: Colors.white,
-                                  ),
-                            items: const [
-                              DropdownMenuItem(
-                                child: Text(
-                                  "Male",
-                                  style: TextStyle(color: Colors.white),
+                        title: DropdownButton(
+                          dropdownColor: Colors.black,
+                          iconSize: 30,
+                          enableFeedback: true,
+                          iconEnabledColor: Colors.transparent,
+                          items: const [
+                            DropdownMenuItem(
+                              child: Text(
+                                "Gender",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
-                                value: 'Male',
                               ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  "Female",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                value: 'Female',
+                              value: 'Gender',
+                            ),
+                            DropdownMenuItem(
+                              child: Text(
+                                "Male",
+                                style: TextStyle(color: Colors.white),
                               ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  "Other",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                value: 'Other',
+                              value: 'Male',
+                            ),
+                            DropdownMenuItem(
+                              child: Text(
+                                "Female",
+                                style: TextStyle(color: Colors.white),
                               ),
-                            ],
-                            value: gender,
-                            onChanged: ((String? value) {
-                              setState(() {
-                                gender = value!;
+                              value: 'Female',
+                            ),
+                          ],
+                          value: ling,
+                          onChanged: ((String? value) {
+                            setState(
+                              () {
+                                ling = value!;
                                 is_tap = false;
-                              });
-                            })),
+                              },
+                            );
+                          }),
+                        ),
                       ),
                     ),
                     SizedBox(height: 20.h),
@@ -340,7 +405,6 @@ class _New_accountState extends State<New_account> {
                           phone: phone_con.text,
                           password: pass_con.text,
                           confirm_pass: confirm_pass_con.text,
-                          department: department_con.text,
                         );
                       },
                       child: Text(

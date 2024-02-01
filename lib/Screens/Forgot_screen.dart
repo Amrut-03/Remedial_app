@@ -1,4 +1,6 @@
+import 'package:Remedial_App/Screens/Home_screen.dart';
 import 'package:Remedial_App/Screens/login_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +20,8 @@ class _Forgot_screenState extends State<Forgot_screen> {
   forgot_pass({required String emailId}) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: emailId);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           backgroundColor: Colors.white,
           content: Text(
             'Email sent Successfully',
@@ -26,9 +29,12 @@ class _Forgot_screenState extends State<Forgot_screen> {
               color: Colors.black,
               fontWeight: FontWeight.w600,
             ),
-          )));
+          ),
+        ),
+      );
     } on FirebaseException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           backgroundColor: Colors.white,
           content: Text(
             e.message!,
@@ -36,7 +42,9 @@ class _Forgot_screenState extends State<Forgot_screen> {
               color: Colors.black,
               fontWeight: FontWeight.w600,
             ),
-          )));
+          ),
+        ),
+      );
     }
   }
 
@@ -143,7 +151,7 @@ class _Forgot_screenState extends State<Forgot_screen> {
                             ),
                             style: ElevatedButton.styleFrom(
                               elevation: 10,
-                              primary: Colors.black,
+                              backgroundColor: Colors.black,
                               minimumSize: Size(350.w, 50.h),
                               shadowColor: Colors.deepPurpleAccent,
                               shape: RoundedRectangleBorder(

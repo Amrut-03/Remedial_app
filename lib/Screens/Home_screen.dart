@@ -1,4 +1,7 @@
+import 'package:Remedial_App/Branches/Civil.dart';
 import 'package:Remedial_App/Branches/Computer.dart';
+import 'package:Remedial_App/Branches/Electrical.dart';
+import 'package:Remedial_App/Branches/Mechanical.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -65,6 +68,9 @@ class _Home_ScreenState extends State<Home_Screen> {
                     top: 30.h, bottom: 20.h, left: 20.w, right: 10.w),
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     shimmer_padding(
                         right: 10.w,
                         left: 10.w,
@@ -73,7 +79,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                         height: 130.h,
                         width: 350.w),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     shimmer_padding(
                         right: 10.w,
@@ -82,68 +88,28 @@ class _Home_ScreenState extends State<Home_Screen> {
                         bottom: 0.h,
                         height: 50.h,
                         width: 370.w),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        shimmer_padding(
-                            right: 10.w,
-                            left: 10.w,
-                            top: 10.h,
-                            bottom: 10.w,
-                            height: 170.h,
-                            width: 350.w),
-                      ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    shimmer_padding(
+                        right: 10.w,
+                        left: 10.w,
+                        top: 10.h,
+                        bottom: 10.w,
+                        height: 170.h,
+                        width: 350.w),
+                    SizedBox(
+                      height: 30,
                     ),
                     shimmer_padding(
                         right: 20.w,
-                        left: 20.w,
+                        left: 30.w,
                         top: 0.h,
                         bottom: 0.h,
-                        height: 50.h,
-                        width: 370.w),
+                        height: 100.h,
+                        width: 350.w),
                     SizedBox(
                       height: 10.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        shimmer_padding(
-                            right: 20.w,
-                            left: 30.w,
-                            top: 0.h,
-                            bottom: 0.h,
-                            height: 70.h,
-                            width: 150.w),
-                        shimmer_padding(
-                            right: 20.w,
-                            left: 30.w,
-                            top: 0.h,
-                            bottom: 0.h,
-                            height: 70.h,
-                            width: 150.w),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        shimmer_padding(
-                            right: 20.w,
-                            left: 30.w,
-                            top: 0.h,
-                            bottom: 0.h,
-                            height: 70.h,
-                            width: 150.w),
-                        shimmer_padding(
-                            right: 20.w,
-                            left: 30.w,
-                            top: 0.h,
-                            bottom: 0.h,
-                            height: 70.h,
-                            width: 150.w),
-                      ],
                     ),
                   ],
                 ),
@@ -160,6 +126,9 @@ class _Home_ScreenState extends State<Home_Screen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     Padding(
                       padding:
                           EdgeInsets.only(top: 10.h, left: 10.w, right: 10.w),
@@ -241,7 +210,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 20.h),
                     Container(
                       margin: EdgeInsets.all(5.w),
                       child: Padding(
@@ -261,9 +230,9 @@ class _Home_ScreenState extends State<Home_Screen> {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 20.h),
                     Container(
-                      height: 180.h,
+                      height: 200.h,
                       width: 350.w,
                       decoration: BoxDecoration(
                         color: Colors.black,
@@ -301,88 +270,82 @@ class _Home_ScreenState extends State<Home_Screen> {
                         carouselController: carouselController,
                       ),
                     ),
-                    SizedBox(height: 20.h),
-                    branch_widget(
-                      fonsize: 20.sp,
-                      branch_name: 'Choose Your Branch',
-                      onclick: () {},
-                      height: 50.h,
-                      width: 350.w,
-                    ),
-                    SizedBox(height: 10.h),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 20.w, right: 20.w, bottom: 10.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              branch_widget(
-                                fonsize: 12.sp,
-                                branch_name: 'Computer Science Engineering',
-                                height: 70.h,
-                                width: 150.w,
-                                onclick: () {
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        child: Computer(),
-                                        type: PageTransitionType.bottomToTop,
-                                        duration: Duration(milliseconds: 400),
-                                      ));
-                                },
+                    SizedBox(height: 30.h),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 0),
+                      child: InkWell(
+                        onTap: () {
+                          if (data['department'] ==
+                              'Computer Science Engineering') {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                  child: Computer(),
+                                  type: PageTransitionType.bottomToTop,
+                                  duration: Duration(milliseconds: 400),
+                                ));
+                          } else if (data['department'] ==
+                              'Mechanical Engineering') {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                  child: Mechanical(),
+                                  type: PageTransitionType.bottomToTop,
+                                  duration: Duration(milliseconds: 400),
+                                ));
+                          } else if (data['department'] ==
+                              'Electrical Engineering') {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                  child: Electrical(),
+                                  type: PageTransitionType.bottomToTop,
+                                  duration: Duration(milliseconds: 400),
+                                ));
+                          } else if (data['department'] ==
+                              'Civil Engineering') {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                  child: Civil(),
+                                  type: PageTransitionType.bottomToTop,
+                                  duration: Duration(milliseconds: 400),
+                                ));
+                          } else {
+                            Text(
+                              "Insert your branch details in your Profile page",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15.sp,
+                                color: Colors.white,
                               ),
-                              SizedBox(width: 10.w),
-                              branch_widget(
-                                fonsize: 12.sp,
-                                branch_name: 'Mechanical Engineering',
-                                height: 70.h,
-                                width: 150.w,
-                                onclick: () {
-                                  //   Navigator.push(
-                                  //       context,
-                                  //       MaterialPageRoute(
-                                  //           builder: (context) => Mechanical()));
-                                },
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: 100,
+                          width: 350,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.r)),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 30.w, right: 20.w),
+                            child: Center(
+                              child: Text(
+                                data['department'],
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.sp,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              branch_widget(
-                                fonsize: 12.sp,
-                                branch_name: 'Civil Engineering',
-                                height: 70.h,
-                                width: 150.w,
-                                onclick: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => Civil()));
-                                },
-                              ),
-                              SizedBox(width: 10.w),
-                              branch_widget(
-                                branch_name: 'Electrical Engineering',
-                                height: 70.h,
-                                width: 150.w,
-                                onclick: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => Electrical()));
-                                },
-                                fonsize: 12.sp,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     )
                   ],
                 ),
@@ -408,51 +371,6 @@ class _Home_ScreenState extends State<Home_Screen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
           color: Colors.white,
-        ),
-      ),
-    );
-  }
-}
-
-class branch_widget extends StatelessWidget {
-  branch_widget({
-    super.key,
-    required this.branch_name,
-    required this.onclick,
-    required this.height,
-    required this.width,
-    required this.fonsize,
-  });
-
-  final String branch_name;
-  final VoidCallback onclick;
-  final double height;
-  final double width;
-  final double fonsize;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onclick,
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.all(Radius.circular(15.r)),
-        ),
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(left: 30.w, right: 20.w),
-            child: Text(
-              branch_name,
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-                fontSize: fonsize.sp,
-                color: Colors.white,
-              ),
-            ),
-          ),
         ),
       ),
     );

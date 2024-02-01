@@ -21,6 +21,9 @@ class _profilePageState extends State<profilePage> {
   var user_data;
   bool is_loading = true;
   bool is_info = true;
+  String branch = 'Department';
+  bool on_click = true;
+  var other_data;
 
   get_user_data({required String docId}) async {
     user_data =
@@ -85,23 +88,35 @@ class _profilePageState extends State<profilePage> {
               Center(
                 child: ElevatedButton(
                     onPressed: () async {
-                      await FirebaseFirestore.instance
-                          .collection("users")
-                          .doc(docId)
-                          .update({
-                        field: updated_controller.text,
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.white,
-                          content: Text(
-                            "Information Submitted Successfully.",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                          )));
-                      Navigator.pop(context);
-                      get_user_data(docId: emailId);
+                      if (updated_controller.text == '') {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Colors.white,
+                            content: Text(
+                              'Fill Information correctly🚨',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            )));
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(docId)
+                            .update({
+                          field: updated_controller.text,
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Colors.white,
+                            content: Text(
+                              "Information Submitted Successfully.",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            )));
+                        Navigator.pop(context);
+                        get_user_data(docId: emailId);
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       maximumSize: Size(800, 40),
@@ -149,9 +164,18 @@ class _profilePageState extends State<profilePage> {
                       height: 150,
                       width: 150,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 10,
+                                spreadRadius: 1,
+                                offset: Offset(
+                                  5,
+                                  5,
+                                ))
+                          ]),
                       child: is_info
                           ? Image.asset(
                               "images/avaters/female_pic.png",
@@ -232,14 +256,18 @@ class _profilePageState extends State<profilePage> {
                                 indent: 10,
                                 endIndent: 10,
                               ),
-                              Reusable_tile(
-                                  text: 'department',
-                                  onClick: () => updated_dialog(
-                                      docId: emailId, field: 'department'),
-                                  tra_icon: Icon(Icons.arrow_forward,
-                                      color: Colors.white),
-                                  lead_icon: Icon(Icons.holiday_village,
-                                      color: Colors.white)),
+                              ListTile(
+                                leading: Icon(Icons.holiday_village,
+                                    color: Colors.white),
+                                title: Text(
+                                  user_data['department'],
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.ubuntu(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ),
                               Divider(
                                 color: Colors.white,
                                 indent: 10,

@@ -23,15 +23,26 @@ class _start_screen_csState extends State<start_screen_cs> {
         children: [
           rules(),
           SizedBox(height: 30),
-          ElevatedButton(onPressed: (){
-            Navigator.push(
-                context,
-                PageTransition(
-                    child: ExamInterface(subject: 'cs', sem_num: 'sem2'),
-                    type: PageTransitionType.leftToRight));
-          },style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-          ),child: Text("Submit",style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.white),),),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: ExamInterface(
+                          subject: 'communication', sem_num: 'sem2'),
+                      type: PageTransitionType.leftToRight));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+            ),
+            child: Text(
+              "Submit",
+              style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                  color: Colors.white),
+            ),
+          ),
         ],
       ),
     );

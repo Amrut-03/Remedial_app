@@ -12,6 +12,14 @@ class _help_supportState extends State<help_support> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurpleAccent,
+      body: Center(
+        child: Container(
+          height: 400,
+          width: 200,
+          color: Colors.black,
+          child: Text(""),
+        ),
+      ),
     );
   }
 }
