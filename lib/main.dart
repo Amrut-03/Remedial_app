@@ -1,4 +1,4 @@
-import 'package:Remedial_App/Screens/splash_screen.dart';
+import 'package:Remedial_App/Pages/splash_screen.dart';
 import 'package:Remedial_App/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
