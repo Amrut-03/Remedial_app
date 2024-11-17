@@ -1,16 +1,47 @@
-# firstapps
+# **Remedial App**  
 
-A new Flutter project.
+## **Project Description**  
+The **Remedial App** is a comprehensive learning platform designed to assist users in mastering computer science fundamentals and aptitude skills. It features a user-friendly interface for accessing notes, solving aptitude questions, managing user profiles, providing feedback, and reviewing test answers. The app integrates modern technologies for seamless functionality and performance.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## **Table of Contents**  
+1. [Features](#features)  
+2. [Technologies Used](#technologies-used)  
+3. [Installation](#installation)  
+4. [Usage](#usage)  
+5. [APIs and Advertisements](#apis-and-advertisements)  
+6. [Screenshots](#screenshots)  
+7. [Video and Photos](#video-and-photos)  
+8. [Feedback](#feedback)  
+9. [Contact](#contact)  
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## **Features**  
+- **CS Fundamentals**: Access structured notes and important concepts.  
+- **Aptitude Questions**: Practice and improve problem-solving skills with various questions.  
+- **Question Setter**: Create custom questions for practice or testing.  
+- **Feedback Section**: Share user experience and suggestions.  
+- **Profile Page**: Manage user profiles and progress tracking.  
+- **Test Answers**: Review correct answers for attempted tests.  
+- **Advertisement Integration**: View relevant advertisements using external APIs.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## **Technologies Used**  
+- **Framework**: Flutter  
+- **Programming Language**: Dart  
+- **Database**: Firebase  
+- **Tools**:  
+  - **API Testing**: Postman  
+  - **Advertisement Integration**: Custom API  
+  - **IDE**: Visual Studio Code  
+
+---
+
+## **Installation**  
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/your-username/remedial-app.git
+   cd remedial-app
