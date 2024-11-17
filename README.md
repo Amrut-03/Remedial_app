@@ -10,9 +10,7 @@ The **Remedial App** is a comprehensive learning platform designed to assist use
 2. [Technologies Used](#technologies-used)  
 3. [Installation](#installation)  
 4. [Usage](#usage))  
-5. [APIs and Advertisements](#apis-and-advertisements
-6. [Screenshots](#screenshots)  
-7. [Demo Video](#Demo-Video)  
+5. [Demo Video](#Demo-Video)  
 
 ---
 
@@ -43,7 +41,9 @@ The **Remedial App** is a comprehensive learning platform designed to assist use
    ```bash
    git clone https://github.com/your-username/remedial-app.git
    cd remedial-app
-
+2. APK file drive link:  
+   ```bash
+   https://drive.google.com/file/d/1guDu_df-ShTu8PiMPshA9DrgO1AnsLq9/view?usp=sharing
 ---
 
 ## **Usage**  
@@ -55,9 +55,5 @@ The **Remedial App** is a comprehensive learning platform designed to assist use
 
 ---
 
-## **ScreenShots**  
+## **Demo Video**  
 
-
----
-
-## **Demo Video** 
