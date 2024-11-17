@@ -9,7 +9,7 @@ The **Remedial App** is a comprehensive learning platform designed to assist use
 1. [Features](#features)  
 2. [Technologies Used](#technologies-used)  
 3. [Installation](#installation)  
-4. [Usage](#usage))  
+4. [Usage](#usage)  
 5. [Demo Video](#Demo-Video)  
 
 ---
