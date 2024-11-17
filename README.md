@@ -45,3 +45,21 @@ The **Remedial App** is a comprehensive learning platform designed to assist use
    ```bash
    git clone https://github.com/your-username/remedial-app.git
    cd remedial-app
+
+---
+
+## **Usage**  
+- **Navigate through Features**:
+    - Access notes and questions from the home screen.
+    - Create new questions using the Question Setter feature.
+- **Take Tests**: Attempt aptitude tests and review answers.
+- **Provide Feedback**: Navigate to the Feedback section to share suggestions or issues.
+
+---
+
+## **ScreenShots**  
+
+
+---
+
+## **Demo Video** 
